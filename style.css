@@ -11,6 +11,7 @@
   --muted: #52606d;
   --accent: #1f6feb;
   --topbar-bg: #12263a;
+  --topbar-bg-2: #1d3a56;
   --topbar-text: #ffffff;
   --border: #e4e7eb;
 }
@@ -23,6 +24,7 @@
     --muted: #9aa5b1;
     --accent: #58a6ff;
     --topbar-bg: #0b1520;
+    --topbar-bg-2: #15283b;
     --border: #2d3640;
   }
 }
@@ -40,7 +42,9 @@ body {
   position: sticky;
   top: 0;
   z-index: 10;
-  background: var(--topbar-bg);
+  background:
+    url("mountains.svg") repeat-x left bottom / auto 100%,
+    linear-gradient(180deg, var(--topbar-bg) 0%, var(--topbar-bg-2) 100%);
   color: var(--topbar-text);
 }
 
@@ -120,6 +124,85 @@ body {
   color: var(--muted);
 }
 
+/* Bild + text-sektioner */
+.feature {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  margin-top: 40px;
+}
+
+.feature.reverse {
+  flex-direction: row-reverse;
+}
+
+.feature-image,
+.feature-text {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.feature-image {
+  aspect-ratio: 4 / 3;
+  border: 2px dashed var(--border);
+  border-radius: 10px;
+  background: var(--bg);
+}
+
+/* Fristående bildruta i löptext */
+.page-image {
+  aspect-ratio: 16 / 9;
+  margin: 24px 0;
+}
+
+.feature-text h2 {
+  margin: 0 0 8px;
+}
+
+/* Kontakt */
+.contact {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+  margin-top: 32px;
+}
+
+.contact-card {
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg);
+}
+
+.contact-card h2 {
+  margin: 0 0 12px;
+  font-size: 1.15rem;
+}
+
+.contact-card address {
+  font-style: normal;
+}
+
+.contact-list {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 6px 16px;
+  margin: 0;
+}
+
+.contact-list dt {
+  font-weight: 600;
+}
+
+.contact-list dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.contact a {
+  color: var(--accent);
+}
+
 /* Surfplatta */
 @media (max-width: 900px) {
   .content {
@@ -157,5 +240,13 @@ body {
   .content {
     margin: 12px;
     padding: 20px;
+  }
+
+  .feature,
+  .feature.reverse {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+    margin-top: 32px;
   }
 }

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="60" viewBox="0 0 600 60">
+  <!-- Bakre bergskedja, ljusare och mer avlägsen -->
+  <path fill="#ffffff" fill-opacity="0.06"
+        d="M0 38 L40 30 L75 36 L120 18 L150 26 L185 14 L230 30 L270 22 L310 34 L360 16 L395 24 L430 12 L475 28 L520 20 L560 32 L600 38 V60 H0 Z"/>
+  <!-- Snötoppar på de högsta topparna -->
+  <path fill="#ffffff" fill-opacity="0.10"
+        d="M178 18 L185 14 L193 19 L188 18 L184 20 Z
+           M114 21 L120 18 L127 22 L122 21 L118 23 Z
+           M353 19 L360 16 L367 20 L362 19 L358 21 Z
+           M423 16 L430 12 L438 17 L433 16 L428 18 Z"/>
+  <!-- Främre bergskedja, mörkare och närmare -->
+  <path fill="#ffffff" fill-opacity="0.10"
+        d="M0 50 L50 42 L90 48 L140 34 L175 44 L220 38 L265 50 L320 36 L355 44 L400 30 L440 42 L490 38 L540 48 L575 44 L600 50 V60 H0 Z"/>
+</svg>
