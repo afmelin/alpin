@@ -1,14 +1,31 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
       "type": "product-hero",
       "settings": {
-        "product": "alpin-skidmarken"
+        "product": "grona-backen",
+        "eyebrow": "Skidmärken för barn",
+        "heading": "Fira varje framsteg i skidbacken",
+        "lead": "<p>Från första plogen till första knappliften. Barnet samlar märken på sin egen sköld och tar hem ett minne att vara stolt över.</p>",
+        "bullets": "Gör de första skiddagarna roligare\nEtt minne från resan att visa upp\nVäcker längtan till nästa skidsemester",
+        "picker_label": "Välj paket",
+        "variant_descriptions": "Startpaketet: 1 märkessköld + 4 skidmärken\nSyskonpaketet: 2 märkessköldar + 8 skidmärken",
+        "button_label": "Köp nu",
+        "trust": "Fri frakt över 499 kr\nSkickas inom 1–2 vardagar – hinner fram före resan\n14 dagars ångerrätt",
+        "sticky": true
       }
     },
     "benefits": {
       "type": "benefits",
-      "settings": {},
       "blocks": {
         "benefits-1": {
           "type": "benefit",
@@ -39,13 +56,15 @@
         "benefits-1",
         "benefits-2",
         "benefits-3"
-      ]
+      ],
+      "settings": {
+        "heading": "Med rätt morot kommer skidglädjen snabbt",
+        "text": "<p>De första gångerna i skidbacken är inte alltid så roliga. Det är kallt, pjäxorna klämmer och det är lätt att ramla. Skidmärken gör varje åk till ett steg framåt.</p>",
+        "alt_bg": true
+      }
     },
     "included": {
       "type": "included",
-      "settings": {
-        "button_link": "/pages/markena"
-      },
       "blocks": {
         "included-1": {
           "type": "item",
@@ -59,28 +78,34 @@
           "type": "item",
           "settings": {
             "title": "Skidskolemärke",
-            "text": "Gått i skidskola"
+            "text": "Gått i skidskola",
+            "wide": false
           }
         },
         "included-3": {
           "type": "item",
           "settings": {
             "title": "Barnbacken",
-            "text": "Första åken på riktigt"
+            "text": "Första åken på riktigt",
+            "wide": false
           }
         },
         "included-4": {
           "type": "item",
           "settings": {
+            "image": "shopify://shop_images/01_berg_gron.png",
             "title": "Gröna backen",
-            "text": "Första gröna backen"
+            "text": "Första gröna backen",
+            "wide": false
           }
         },
         "included-5": {
           "type": "item",
           "settings": {
+            "image": "shopify://shop_images/05_knapplift.png",
             "title": "Knapplift",
-            "text": "Åkt knapplift själv"
+            "text": "Åkt knapplift själv",
+            "wide": false
           }
         }
       },
@@ -90,23 +115,33 @@
         "included-3",
         "included-4",
         "included-5"
-      ]
+      ],
+      "settings": {
+        "heading": "Det här ingår i Startpaketet",
+        "text": "<p>En märkessköld och fyra märken, ett för varje milstolpe i backen.</p>",
+        "button_label": "Läs mer om märkena",
+        "button_link": "/pages/markena",
+        "alt_bg": false
+      }
     },
     "video": {
       "type": "image-text",
       "settings": {
+        "video_url": "",
         "image_label": "Video: märkena i backen (från Instagram/YouTube)",
         "show_video_placeholder": true,
+        "image_right": false,
+        "eyebrow": "",
         "heading": "Se märkena i verkligheten",
         "text": "<p>Så här ser det ut när ett barn får sitt första märke efter dagen i barnbacken.</p>",
         "product": "alpin-skidmarken",
         "button_label": "Köp Startpaketet",
+        "button_link": "",
         "alt_bg": true
       }
     },
     "steps": {
       "type": "steps",
-      "settings": {},
       "blocks": {
         "steps-1": {
           "type": "step",
@@ -134,26 +169,38 @@
         "steps-1",
         "steps-2",
         "steps-3"
-      ]
+      ],
+      "settings": {
+        "heading": "Så funkar det",
+        "alt_bg": false
+      }
     },
     "social": {
       "type": "social-proof",
-      "settings": {}
+      "settings": {
+        "heading": "Från backen",
+        "text": "<p>Bilder från familjer som samlar märken. Dela era egna på Instagram!</p>",
+        "alt_bg": true
+      }
     },
     "gift": {
       "type": "image-text",
       "settings": {
+        "video_url": "",
         "image_label": "Bild: inslaget paket med märkessköld",
+        "show_video_placeholder": false,
+        "image_right": false,
         "eyebrow": "Present",
         "heading": "Den perfekta presenten inför skidresan",
         "text": "<p>Till barnbarnet, brorsbarnet eller gudbarnet som ska ut i backen för första gången. Välj presentinslagning i varukorgen så kommer paketet inslaget och klart att ge bort.</p>",
         "product": "alpin-skidmarken",
-        "button_label": "Köp som present"
+        "button_label": "Köp som present",
+        "button_link": "",
+        "alt_bg": false
       }
     },
     "faq": {
       "type": "faq",
-      "settings": {},
       "blocks": {
         "faq-1": {
           "type": "question",
@@ -205,13 +252,20 @@
         "faq-4",
         "faq-5",
         "faq-6"
-      ]
+      ],
+      "settings": {
+        "heading": "Vanliga frågor",
+        "alt_bg": true
+      }
     },
     "cta": {
       "type": "cta-band",
       "settings": {
+        "heading": "Gör skidresan till ett minne för livet",
+        "text": "<p>Märkessköld + 4 skidmärken. Skickas inom 1–2 vardagar.</p>",
         "product": "alpin-skidmarken",
-        "button_label": "Köp Startpaketet"
+        "button_label": "Köp Startpaketet",
+        "button_link": ""
       }
     }
   },
