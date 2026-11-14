@@ -2,53 +2,339 @@
 <html lang="sv">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Alpin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Alpin – Skidmärken för barn</title>
+  <meta name="description" content="Fira varje framsteg i skidbacken. Märkessköld + 4 skidmärken som barnet samlar under skidresan – ett minne att vara stolt över.">
+  <meta property="og:title" content="Alpin – Skidmärken för barn">
+  <meta property="og:description" content="Fira varje framsteg i skidbacken med en egen märkessköld och fyra skidmärken.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#12263a">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div class="announce">Fri frakt över 499 kr · <strong>Beställ före resan</strong> – skickas inom 1–2 vardagar</div>
+
   <header class="topbar">
     <div class="topbar-inner">
-      <a href="#" class="logo">Alpin</a>
-
-      <nav id="menu" class="menu">
-        <a href="index.html" class="active">Hem</a>
-        <a href="skidmarken.html">Skidmärken</a>
+      <a href="index.html" class="logo">Alpin</a>
+      <nav class="menu" aria-label="Huvudmeny">
+        <a href="index.html" class="active" aria-current="page">Hem</a>
+        <a href="skidmarken.html">Märkena</a>
         <a href="varmal.html">Vårt mål</a>
         <a href="kontakt.html">Kontakt</a>
       </nav>
+      <a href="kassa.html" class="cart-link" aria-label="Varukorg">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6h15l-1.5 9h-12z"/><path d="M6 6 5 3H2"/><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/></svg>
+        <span class="cart-count" data-cart-count hidden>0</span>
+      </a>
     </div>
   </header>
 
-  <main class="content">
-    <h1>Skidmärken för barn</h1>
-    <p>De första gångerna i skidbacken är inte alltid så roliga. Det är kallt, pjäxorna klämmer och det är lätt att ramla. Men med rätt morot kan glädjen komma snabbt, och snart är barnet fast i den underbara skidsporten.</p>
-    <p>Skidmärken gör varje åk till ett steg framåt! Barnen får upptäcka nya utmaningar, känna stolthet över sina framsteg och samla fina minnen i backen. En rolig morot som stärker både självförtroendet och skidglädjen.</p>
+  <main>
+    <!-- 1. Köpdelen: produkt, nytta, pris och knapp direkt -->
+    <section class="wrap hero">
+      <div class="hero-media">
+        <div class="ph"><span>Bild: barn i skidbacken som stolt visar upp sin märkessköld</span></div>
+        <div class="thumbs">
+          <div class="ph">Skölden</div>
+          <div class="ph">Märkena</div>
+          <div class="ph">På jackan</div>
+          <div class="ph">Storlek i handen</div>
+        </div>
+      </div>
 
-    <section class="feature">
-      <div class="feature-image" aria-hidden="true"></div>
-      <div class="feature-text">
-        <h2>Fira varje framsteg i backen</h2>
-        <p>Första svängen, första liftåket eller första gången nerför den röda backen – varje steg är värt att fira. Med skidmärken blir barnens framsteg synliga och något att vara riktigt glad över.</p>
+      <div class="hero-buy">
+        <p class="eyebrow">Skidmärken för barn</p>
+        <h1>Fira varje framsteg i skidbacken</h1>
+        <p class="lead">Från första plogen till första knappliften. Barnet samlar märken på sin egen sköld och tar hem ett minne att vara stolt över.</p>
+
+        <ul class="checks">
+          <li>Gör de första skiddagarna roligare</li>
+          <li>Ett minne från resan att visa upp</li>
+          <li>Väcker längtan till nästa skidsemester</li>
+        </ul>
+
+        <fieldset class="packs">
+          <legend>Välj paket</legend>
+          <label class="pack">
+            <input type="radio" name="pack" value="start" checked>
+            <span class="pack-body">
+              <span class="pack-name">Startpaketet</span>
+              <span class="pack-desc">1 märkessköld + 4 skidmärken</span>
+            </span>
+            <span class="pack-price">349 kr</span>
+          </label>
+          <label class="pack">
+            <span class="pack-tag">Spara 99 kr</span>
+            <input type="radio" name="pack" value="syskon">
+            <span class="pack-body">
+              <span class="pack-name">Syskonpaketet</span>
+              <span class="pack-desc">2 märkessköldar + 8 skidmärken</span>
+            </span>
+            <span class="pack-price"><s>698 kr</s>599 kr</span>
+          </label>
+        </fieldset>
+
+        <button type="button" class="btn btn-primary btn-block" data-add="selected-pack" data-go="kassa" data-sticky-anchor>
+          Köp nu – <span data-pack-price>349 kr</span>
+        </button>
+
+        <ul class="trust">
+          <li>Fri frakt över 499 kr</li>
+          <li>Skickas inom 1–2 vardagar – hinner fram före resan</li>
+          <li>14 dagars ångerrätt</li>
+        </ul>
+
+        <ul class="pay-badges" aria-label="Betalsätt">
+          <li class="pay pay-visa">VISA</li>
+          <li class="pay pay-mc">Mastercard</li>
+          <li class="pay pay-swish">Swish</li>
+          <li class="pay pay-klarna">Klarna</li>
+        </ul>
       </div>
     </section>
 
-    <section class="feature reverse">
-      <div class="feature-image" aria-hidden="true"></div>
-      <div class="feature-text">
-        <h2>Ett roligt minne att vara stolt över</h2>
-        <p>Skidmärket blir ett minne från skidresan som barnet kan ta med sig hem. Ett bevis på vad de klarat av – och något att visa upp med stolthet för familj och vänner.</p>
+    <!-- 2. Varför – känslan -->
+    <section class="section section-alt">
+      <div class="wrap">
+        <div class="section-head center">
+          <h2>Med rätt morot kommer skidglädjen snabbt</h2>
+          <p class="muted">De första gångerna i skidbacken är inte alltid så roliga. Det är kallt, pjäxorna klämmer och det är lätt att ramla. Skidmärken gör varje åk till ett steg framåt.</p>
+        </div>
+
+        <div class="grid-3">
+          <article class="card benefit">
+            <div class="ph"><span>Bild: barn som firar i backen</span></div>
+            <h3>Fira varje framsteg</h3>
+            <p>Första svängen, första liftåket, första gröna backen. Varje steg blir synligt och värt att fira.</p>
+          </article>
+          <article class="card benefit">
+            <div class="ph"><span>Bild: barn visar skölden för familjen</span></div>
+            <h3>Ett minne att vara stolt över</h3>
+            <p>Märkena följer med hem som ett bevis på vad barnet klarat av, att visa upp för familj och kompisar.</p>
+          </article>
+          <article class="card benefit">
+            <div class="ph"><span>Bild: skölden hemma på väggen</span></div>
+            <h3>Längtan till nästa resa</h3>
+            <p>Varje gång barnet ser sina märken påminns de om dagarna i backen och börjar längta efter nästa skidsemester.</p>
+          </article>
+        </div>
       </div>
     </section>
 
-    <section class="feature">
-      <div class="feature-image" aria-hidden="true"></div>
-      <div class="feature-text">
-        <h2>Längtan till nästa skidsemester</h2>
-        <p>Varje gång barnet ser sitt märke påminns de om dagarna i backen. Det väcker glädje och förväntan inför nästa skidsemester – och nya märken att samla.</p>
+    <!-- 3. Vad ingår -->
+    <section class="section">
+      <div class="wrap">
+        <div class="section-head center">
+          <h2>Det här ingår i Startpaketet</h2>
+          <p class="muted">En märkessköld och fyra märken, ett för varje milstolpe i backen.</p>
+        </div>
+
+        <div class="included">
+          <div class="item item-main">
+            <div class="ph ph-wide"><span>Bild: märkesskölden med alla fyra märken på plats</span></div>
+            <h3>Märkessköld</h3>
+            <p>Här samlas alla märken</p>
+          </div>
+          <div class="item">
+            <div class="ph ph-square"><span>Skidskolemärke</span></div>
+            <h3>Skidskolemärke</h3>
+            <p>Gått i skidskola</p>
+          </div>
+          <div class="item">
+            <div class="ph ph-square"><span>Barnbacken</span></div>
+            <h3>Barnbacken</h3>
+            <p>Första åken på riktigt</p>
+          </div>
+          <div class="item">
+            <div class="ph ph-square"><span>Gröna backen</span></div>
+            <h3>Gröna backen</h3>
+            <p>Första gröna backen</p>
+          </div>
+          <div class="item">
+            <div class="ph ph-square"><span>Knapplift</span></div>
+            <h3>Knapplift</h3>
+            <p>Åkt knapplift själv</p>
+          </div>
+        </div>
+
+        <p style="text-align:center; margin-top:24px">
+          <a href="skidmarken.html" class="btn btn-secondary btn-small">Läs mer om märkena</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- 4. Video -->
+    <section class="section section-alt">
+      <div class="wrap split">
+        <div class="ph ph-wide ph-video"><span>Video: märkena i backen (från Instagram/YouTube)</span></div>
+        <div>
+          <h2>Se märkena i verkligheten</h2>
+          <p class="muted">Så här ser det ut när ett barn får sitt första märke efter dagen i barnbacken.</p>
+          <button type="button" class="btn btn-primary" data-add="start" data-go="kassa">Köp Startpaketet – 349 kr</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Så funkar det -->
+    <section class="section">
+      <div class="wrap">
+        <div class="section-head center">
+          <h2>Så funkar det</h2>
+        </div>
+        <ol class="steps">
+          <li>
+            <h3>Beställ före resan</h3>
+            <p>Vi skickar inom 1–2 vardagar, så paketet hinner fram innan ni åker.</p>
+          </li>
+          <li>
+            <h3>Barnet klarar en utmaning</h3>
+            <p>Skidskolan, barnbacken, gröna backen eller knappliften. Varje framsteg ger ett märke.</p>
+          </li>
+          <li>
+            <h3>Märket sätts på skölden</h3>
+            <p>Skölden fylls på under resan och blir ett minne att ta med hem.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 6. Från backen: kundbilder och omdömen -->
+    <section class="section section-alt">
+      <div class="wrap">
+        <div class="section-head center">
+          <h2>Från backen</h2>
+          <p class="muted">Bilder från familjer som samlar märken. Dela era egna på Instagram!</p>
+        </div>
+
+        <div class="ugc">
+          <div class="ph ph-square">Kundbild</div>
+          <div class="ph ph-square">Kundbild</div>
+          <div class="ph ph-square">Kundbild</div>
+          <div class="ph ph-square">Kundbild</div>
+          <div class="ph ph-square">Kundbild</div>
+          <div class="ph ph-square">Kundbild</div>
+        </div>
+
+        <div class="reviews">
+          <figure class="card review placeholder">
+            <blockquote>Plats för ett kundomdöme.</blockquote>
+            <figcaption>Läggs in när de första kunderna har handlat</figcaption>
+          </figure>
+          <figure class="card review placeholder">
+            <blockquote>Plats för ett kundomdöme.</blockquote>
+            <figcaption>Läggs in när de första kunderna har handlat</figcaption>
+          </figure>
+          <figure class="card review placeholder">
+            <blockquote>Plats för ett kundomdöme.</blockquote>
+            <figcaption>Läggs in när de första kunderna har handlat</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. Present -->
+    <section class="section">
+      <div class="wrap split">
+        <div class="ph"><span>Bild: inslaget paket med märkessköld</span></div>
+        <div>
+          <p class="eyebrow">Present</p>
+          <h2>Den perfekta presenten inför skidresan</h2>
+          <p class="muted">Till barnbarnet, brorsbarnet eller gudbarnet som ska ut i backen för första gången. Välj presentinslagning i kassan så kommer paketet inslaget och klart att ge bort.</p>
+          <button type="button" class="btn btn-primary" data-add="start" data-go="kassa">Köp som present – 349 kr</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. Vanliga frågor -->
+    <section class="section section-alt" id="faq">
+      <div class="wrap">
+        <div class="section-head center">
+          <h2>Vanliga frågor</h2>
+        </div>
+        <div class="faq">
+          <details>
+            <summary>Hinner paketet fram före skidresan?</summary>
+            <p>Vi skickar inom 1–2 vardagar. Beställ gärna en vecka innan ni åker så är ni säkra.</p>
+          </details>
+          <details>
+            <summary>Hur kan jag betala?</summary>
+            <p>Med kort (Visa och Mastercard), Swish eller Klarna. Du behöver inte skapa något konto.</p>
+          </details>
+          <details>
+            <summary>Vad kostar frakten?</summary>
+            <p>39 kr. Handlar du för 499 kr eller mer är frakten gratis.</p>
+          </details>
+          <details>
+            <summary>Kan jag köpa fler märken?</summary>
+            <p>Ja, alla märken finns som lösmärken för 49 kr styck. Du hittar dem under <a href="skidmarken.html">Märkena</a> eller i kassan.</p>
+          </details>
+          <details>
+            <summary>Kan jag ångra mitt köp?</summary>
+            <p>Ja, du har 14 dagars ångerrätt från att du har tagit emot paketet.</p>
+          </details>
+          <details>
+            <summary>Har ni fler frågor?</summary>
+            <p>Hör av dig via <a href="kontakt.html">kontaktsidan</a> så hjälper vi dig.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. Sista köpuppmaningen -->
+    <section class="section">
+      <div class="wrap">
+        <div class="cta-band">
+          <h2>Gör skidresan till ett minne för livet</h2>
+          <p>Märkessköld + 4 skidmärken. Skickas inom 1–2 vardagar.</p>
+          <button type="button" class="btn btn-primary" data-add="start" data-go="kassa">Köp Startpaketet – 349 kr</button>
+        </div>
       </div>
     </section>
   </main>
 
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div>
+          <h3>Alpin</h3>
+          <p>Skidmärken som firar barnens framsteg i backen.</p>
+          <ul class="pay-badges" aria-label="Betalsätt">
+            <li class="pay pay-visa">VISA</li>
+            <li class="pay pay-mc">Mastercard</li>
+            <li class="pay pay-swish">Swish</li>
+            <li class="pay pay-klarna">Klarna</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Butiken</h3>
+          <ul>
+            <li><a href="index.html">Startpaketet</a></li>
+            <li><a href="skidmarken.html">Märkena</a></li>
+            <li><a href="kassa.html">Varukorg</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Om oss</h3>
+          <ul>
+            <li><a href="varmal.html">Vårt mål</a></li>
+            <li><a href="kontakt.html">Kontakt</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="footer-bottom">© Aktiebolaget Alpinfrämjandet</p>
+    </div>
+  </footer>
+
+  <!-- Fast köpfält i mobilen -->
+  <div class="sticky-buy">
+    <div class="sticky-buy-info">
+      <strong data-pack-name>Startpaketet</strong>
+      <span data-pack-price>349 kr</span>
+    </div>
+    <button type="button" class="btn btn-primary" data-add="selected-pack" data-go="kassa">Köp nu</button>
+  </div>
+
+  <script src="shop.js"></script>
 </body>
 </html>

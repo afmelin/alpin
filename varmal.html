@@ -2,31 +2,82 @@
 <html lang="sv">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Vårt mål – Alpin</title>
+  <meta name="description" content="Vårt mål är att fler barn ska hitta skidglädjen och få roliga minnen från backen.">
+  <meta name="theme-color" content="#12263a">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div class="announce">Fri frakt över 499 kr · <strong>Beställ före resan</strong> – skickas inom 1–2 vardagar</div>
+
   <header class="topbar">
     <div class="topbar-inner">
       <a href="index.html" class="logo">Alpin</a>
-
-      <nav id="menu" class="menu">
+      <nav class="menu" aria-label="Huvudmeny">
         <a href="index.html">Hem</a>
-        <a href="skidmarken.html">Skidmärken</a>
-        <a href="varmal.html" class="active">Vårt mål</a>
+        <a href="skidmarken.html">Märkena</a>
+        <a href="varmal.html" class="active" aria-current="page">Vårt mål</a>
         <a href="kontakt.html">Kontakt</a>
       </nav>
+      <a href="kassa.html" class="cart-link" aria-label="Varukorg">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6h15l-1.5 9h-12z"/><path d="M6 6 5 3H2"/><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/></svg>
+        <span class="cart-count" data-cart-count hidden>0</span>
+      </a>
     </div>
   </header>
 
-  <main class="content">
-    <h1>Skidglädje för alla barn</h1>
-    <div class="feature-image page-image" aria-hidden="true"></div>
-    <p>Vårt mål är att fler barn ska motiveras att hitta skidglädjen. Vi vill att varje litet framsteg i backen ska kännas stort, oavsett om det är första åket i barnbacken eller första turen i knappliften.</p>
-    <p>Med våra skidmärken får barnen fira sina framgångar och samtidigt ta med sig roliga minnen hem. Varje märke blir en påminnelse om den underbara skidsemestern de var på, och om allt de klarade av där.</p>
-    <div class="feature-image page-image" aria-hidden="true"></div>
+  <main class="wrap">
+    <article class="prose page-head">
+      <h1>Skidglädje för alla barn</h1>
+      <div class="ph ph-wide"><span>Bild: barn som skrattar i skidbacken</span></div>
+      <p>Vårt mål är att fler barn ska motiveras att hitta skidglädjen. Vi vill att varje litet framsteg i backen ska kännas stort, oavsett om det är första åket i barnbacken eller första turen i knappliften.</p>
+      <p>Med våra skidmärken får barnen fira sina framgångar och samtidigt ta med sig roliga minnen hem. Varje märke blir en påminnelse om den underbara skidsemestern de var på, och om allt de klarade av där.</p>
+      <div class="ph ph-wide"><span>Bild: märkessköld hemma efter resan</span></div>
+    </article>
+
+    <section class="section">
+      <div class="cta-band">
+        <h2>Ge ditt barn en start i backen att minnas</h2>
+        <p>Märkessköld + 4 skidmärken för 349 kr.</p>
+        <button type="button" class="btn btn-primary" data-add="start" data-go="kassa">Köp Startpaketet</button>
+      </div>
+    </section>
   </main>
 
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div>
+          <h3>Alpin</h3>
+          <p>Skidmärken som firar barnens framsteg i backen.</p>
+          <ul class="pay-badges" aria-label="Betalsätt">
+            <li class="pay pay-visa">VISA</li>
+            <li class="pay pay-mc">Mastercard</li>
+            <li class="pay pay-swish">Swish</li>
+            <li class="pay pay-klarna">Klarna</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Butiken</h3>
+          <ul>
+            <li><a href="index.html">Startpaketet</a></li>
+            <li><a href="skidmarken.html">Märkena</a></li>
+            <li><a href="kassa.html">Varukorg</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Om oss</h3>
+          <ul>
+            <li><a href="varmal.html">Vårt mål</a></li>
+            <li><a href="kontakt.html">Kontakt</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="footer-bottom">© Aktiebolaget Alpinfrämjandet</p>
+    </div>
+  </footer>
+
+  <script src="shop.js"></script>
 </body>
 </html>

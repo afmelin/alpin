@@ -2,40 +2,49 @@
 <html lang="sv">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Kontakt – Alpin</title>
+  <meta name="description" content="Kontakta Aktiebolaget Alpinfrämjandet om beställningar, leveranser och återförsäljning.">
+  <meta name="theme-color" content="#12263a">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div class="announce">Fri frakt över 499 kr · <strong>Beställ före resan</strong> – skickas inom 1–2 vardagar</div>
+
   <header class="topbar">
     <div class="topbar-inner">
       <a href="index.html" class="logo">Alpin</a>
-
-      <nav id="menu" class="menu">
+      <nav class="menu" aria-label="Huvudmeny">
         <a href="index.html">Hem</a>
-        <a href="skidmarken.html">Skidmärken</a>
+        <a href="skidmarken.html">Märkena</a>
         <a href="varmal.html">Vårt mål</a>
-        <a href="kontakt.html" class="active">Kontakt</a>
+        <a href="kontakt.html" class="active" aria-current="page">Kontakt</a>
       </nav>
+      <a href="kassa.html" class="cart-link" aria-label="Varukorg">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6h15l-1.5 9h-12z"/><path d="M6 6 5 3H2"/><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/></svg>
+        <span class="cart-count" data-cart-count hidden>0</span>
+      </a>
     </div>
   </header>
 
-  <main class="content">
-    <h1>Kontakt</h1>
-    <p>Har du frågor om våra skidmärken, vill beställa eller bli återförsäljare? Hör gärna av dig, vi svarar så snart vi kan.</p>
+  <main class="wrap">
+    <header class="page-head prose">
+      <h1>Kontakt</h1>
+      <p>Har du frågor om en beställning, leveransen eller vill bli återförsäljare? Hör av dig, vi svarar så snart vi kan. Många svar finns också bland <a href="index.html#faq">vanliga frågor</a>.</p>
+    </header>
 
     <div class="contact">
-      <section class="contact-card">
+      <section class="card">
         <h2>Aktiebolaget Alpinfrämjandet</h2>
         <address>
           Fjällvägen 12<br>
           837 52 Åre<br>
           Sverige
         </address>
-        <p class="contact-meta">Org.nr 559123-4567</p>
+        <p class="muted">Org.nr 559123-4567</p>
       </section>
 
-      <section class="contact-card">
+      <section class="card">
         <h2>Kundtjänst</h2>
         <dl class="contact-list">
           <dt>Telefon</dt>
@@ -49,5 +58,39 @@
     </div>
   </main>
 
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer-grid">
+        <div>
+          <h3>Alpin</h3>
+          <p>Skidmärken som firar barnens framsteg i backen.</p>
+          <ul class="pay-badges" aria-label="Betalsätt">
+            <li class="pay pay-visa">VISA</li>
+            <li class="pay pay-mc">Mastercard</li>
+            <li class="pay pay-swish">Swish</li>
+            <li class="pay pay-klarna">Klarna</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Butiken</h3>
+          <ul>
+            <li><a href="index.html">Startpaketet</a></li>
+            <li><a href="skidmarken.html">Märkena</a></li>
+            <li><a href="kassa.html">Varukorg</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Om oss</h3>
+          <ul>
+            <li><a href="varmal.html">Vårt mål</a></li>
+            <li><a href="kontakt.html">Kontakt</a></li>
+          </ul>
+        </div>
+      </div>
+      <p class="footer-bottom">© Aktiebolaget Alpinfrämjandet</p>
+    </div>
+  </footer>
+
+  <script src="shop.js"></script>
 </body>
 </html>

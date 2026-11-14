@@ -1,3 +1,9 @@
+/* ==========================================================
+   Alpin – webbshop
+   Mobil först: grundstilarna gäller mobil, media queries
+   bygger ut för större skärmar.
+   ========================================================== */
+
 *,
 *::before,
 *::after {
@@ -5,159 +11,781 @@
 }
 
 :root {
-  --bg: #f5f7fa;
+  --bg: #f7f8fb;
   --surface: #ffffff;
-  --text: #1f2933;
-  --muted: #52606d;
-  --accent: #1f6feb;
-  --topbar-bg: #12263a;
-  --topbar-bg-2: #1d3a56;
-  --topbar-text: #ffffff;
-  --border: #e4e7eb;
+  --surface-2: #eef2f7;
+  --text: #17212b;
+  --muted: #56636f;
+  --border: #dfe4ea;
+  --accent: #e2482f;          /* köpknappar och viktiga detaljer */
+  --accent-hover: #c63a23;
+  --accent-soft: #fdeeea;
+  --good: #17804a;
+  --good-soft: #e5f4ec;
+  --navy: #12263a;
+  --navy-2: #1d3a56;
+  --on-dark: #ffffff;
+  --radius: 14px;
+  --shadow: 0 6px 24px rgba(18, 38, 58, 0.08);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #11161c;
-    --surface: #1b222b;
-    --text: #e6edf3;
-    --muted: #9aa5b1;
-    --accent: #58a6ff;
-    --topbar-bg: #0b1520;
-    --topbar-bg-2: #15283b;
-    --border: #2d3640;
-  }
+html {
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
   margin: 0;
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 1rem;
   line-height: 1.6;
   background: var(--bg);
   color: var(--text);
 }
 
-/* Toppmeny */
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+}
+
+h1, h2, h3 {
+  line-height: 1.2;
+  margin: 0 0 12px;
+}
+
+h1 { font-size: clamp(1.75rem, 6vw, 2.75rem); letter-spacing: -0.02em; }
+h2 { font-size: clamp(1.4rem, 4.5vw, 2rem); letter-spacing: -0.01em; }
+h3 { font-size: 1.1rem; }
+
+p {
+  margin: 0 0 12px;
+}
+
+.wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.muted { color: var(--muted); }
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ---------- Topp: kampanjrad + meny ---------- */
+
+.announce {
+  background: var(--navy);
+  color: var(--on-dark);
+  text-align: center;
+  font-size: 0.85rem;
+  padding: 6px 12px;
+}
+
+.announce strong {
+  color: #ffd2c8;
+}
+
 .topbar {
   position: sticky;
   top: 0;
-  z-index: 10;
+  z-index: 20;
   background:
     url("mountains.svg") repeat-x left bottom / auto 100%,
-    linear-gradient(180deg, var(--topbar-bg) 0%, var(--topbar-bg-2) 100%);
-  color: var(--topbar-text);
+    linear-gradient(180deg, var(--navy) 0%, var(--navy-2) 100%);
+  color: var(--on-dark);
 }
 
 .topbar-inner {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 0 16px;
-  height: 60px;
-  display: flex;
+  padding: 8px 12px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas:
+    "logo cart"
+    "nav  nav";
   align-items: center;
-  justify-content: space-between;
+  row-gap: 2px;
 }
 
 .logo {
-  color: var(--topbar-text);
+  grid-area: logo;
+  color: var(--on-dark);
   text-decoration: none;
-  font-weight: 700;
-  font-size: 1.25rem;
+  font-weight: 800;
+  font-size: 1.3rem;
+  letter-spacing: 0.02em;
 }
 
 .menu {
+  grid-area: nav;
   display: flex;
-  gap: 4px;
+  justify-content: space-between;
+  gap: 2px;
 }
 
 .menu a {
-  color: var(--topbar-text);
+  color: var(--on-dark);
   text-decoration: none;
-  padding: 8px 14px;
-  border-radius: 6px;
+  padding: 6px 8px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  white-space: nowrap;
   opacity: 0.85;
 }
 
 .menu a:hover,
 .menu a.active {
   opacity: 1;
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.14);
 }
 
-/* Innehåll */
-.content {
-  max-width: 1100px;
-  margin: 24px auto;
-  padding: 32px;
-  background: var(--surface);
-  border: 1px solid var(--border);
+.cart-link {
+  grid-area: cart;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--on-dark);
+  text-decoration: none;
+  padding: 8px;
+  border-radius: 8px;
+}
+
+.cart-link:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.cart-link svg {
+  width: 26px;
+  height: 26px;
+}
+
+.cart-count {
+  position: absolute;
+  top: 0;
+  right: -2px;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 5px;
   border-radius: 10px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  display: grid;
+  place-items: center;
 }
 
-.content h1 {
-  margin-top: 0;
+.cart-count[hidden] {
+  display: none;
 }
 
-.content p {
+/* ---------- Knappar ---------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 54px;
+  padding: 0 28px;
+  border: 0;
+  border-radius: 999px;
+  font: inherit;
+  font-size: 1.05rem;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 6px 16px rgba(226, 72, 47, 0.3);
+}
+
+.btn-primary:hover {
+  background: var(--accent-hover);
+}
+
+.btn-secondary {
+  background: var(--surface);
+  color: var(--text);
+  border: 2px solid var(--text);
+}
+
+.btn-secondary:hover {
+  background: var(--surface-2);
+}
+
+.btn-small {
+  min-height: 42px;
+  padding: 0 18px;
+  font-size: 0.95rem;
+}
+
+.btn-block {
+  width: 100%;
+}
+
+.btn:focus-visible,
+.pack:focus-within,
+.pay-option:focus-within {
+  outline: 3px solid #2b7cff;
+  outline-offset: 2px;
+}
+
+/* ---------- Bildplatshållare ---------- */
+
+.ph {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 4 / 3;
+  padding: 12px;
+  border: 2px dashed #c3ccd6;
+  border-radius: var(--radius);
+  background: var(--surface-2);
+  color: var(--muted);
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.ph-square { aspect-ratio: 1 / 1; }
+.ph-tall   { aspect-ratio: 4 / 5; }
+.ph-wide   { aspect-ratio: 16 / 9; }
+
+.ph-video {
+  position: relative;
+}
+
+.ph-video::before {
+  content: "";
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--accent) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M8 5v14l11-7z'/%3E%3C/svg%3E") center / 32px no-repeat;
+  grid-area: 1 / 1;
+}
+
+.ph-video span {
+  grid-area: 1 / 1;
+  align-self: end;
+}
+
+/* ---------- Hjälte (köpdelen överst) ---------- */
+
+.hero {
+  display: grid;
+  gap: 20px;
+  padding-top: 16px;
+  padding-bottom: 40px;
+}
+
+.hero-media .ph {
+  aspect-ratio: 4 / 3;
+}
+
+.thumbs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.thumbs .ph {
+  aspect-ratio: 1 / 1;
+  padding: 4px;
+  font-size: 0.7rem;
+  border-width: 1px;
+}
+
+.eyebrow {
+  margin: 0 0 6px;
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.lead {
+  font-size: 1.1rem;
   color: var(--muted);
 }
 
-/* Bild + text-sektioner */
-.feature {
+.checks {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px;
+  display: grid;
+  gap: 6px;
+}
+
+.checks li {
+  position: relative;
+  padding-left: 30px;
+  font-weight: 500;
+}
+
+.checks li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 3px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--good-soft) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2317804a' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l5 5 9-10'/%3E%3C/svg%3E") center / 12px no-repeat;
+}
+
+/* Paketväljare */
+.packs {
+  border: 0;
+  padding: 0;
+  margin: 0 0 16px;
+  display: grid;
+  gap: 10px;
+}
+
+.packs legend {
+  font-weight: 700;
+  margin-bottom: 8px;
+  padding: 0;
+}
+
+.pack {
+  position: relative;
   display: flex;
   align-items: center;
-  gap: 32px;
-  margin-top: 40px;
+  gap: 12px;
+  padding: 14px 16px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
 }
 
-.feature.reverse {
-  flex-direction: row-reverse;
+.pack:has(input:checked) {
+  border-color: var(--accent);
+  background: var(--accent-soft);
 }
 
-.feature-image,
-.feature-text {
-  flex: 1 1 0;
-  min-width: 0;
+.pack input {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--accent);
+  flex: none;
+  margin: 0;
 }
 
-.feature-image {
-  aspect-ratio: 4 / 3;
-  border: 2px dashed var(--border);
-  border-radius: 10px;
-  background: var(--bg);
+.pack-body {
+  flex: 1;
+  display: grid;
 }
 
-/* Fristående bildruta i löptext */
-.page-image {
-  aspect-ratio: 16 / 9;
+.pack-name {
+  font-weight: 700;
+}
+
+.pack-desc {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.pack-price {
+  text-align: right;
+  font-weight: 800;
+  font-size: 1.1rem;
+  white-space: nowrap;
+}
+
+.pack-price s {
+  display: block;
+  font-weight: 400;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.pack-tag {
+  position: absolute;
+  top: -11px;
+  right: 14px;
+  background: var(--good);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 2px 10px;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* Trygghet under köpknappen */
+.trust {
+  list-style: none;
+  padding: 0;
+  margin: 14px 0;
+  display: grid;
+  gap: 4px;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.trust li::before {
+  content: "✓ ";
+  color: var(--good);
+  font-weight: 700;
+}
+
+/* Betalsätt */
+.pay-badges {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.pay {
+  display: inline-flex;
+  align-items: center;
+  height: 30px;
+  padding: 0 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: #fff;
+  color: #1a1f71;
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+
+.pay-visa {
+  font-style: italic;
+  letter-spacing: 0.04em;
+}
+
+.pay-mc {
+  color: #222;
+  gap: 6px;
+}
+
+.pay-mc::before {
+  content: "";
+  width: 22px;
+  height: 14px;
+  background:
+    radial-gradient(circle at 7px 7px, #eb001b 6.5px, transparent 7px),
+    radial-gradient(circle at 15px 7px, #f79e1b 6.5px, transparent 7px);
+}
+
+.pay-swish {
+  color: #222;
+}
+
+.pay-klarna {
+  background: #ffb3c7;
+  border-color: #ffb3c7;
+  color: #17120f;
+}
+
+/* ---------- Sektioner ---------- */
+
+.section {
+  padding: 48px 0;
+}
+
+.section-alt {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.section-head {
+  max-width: 640px;
+  margin-bottom: 24px;
+}
+
+.section-head.center {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.grid-3 {
+  display: grid;
+  gap: 16px;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+}
+
+.benefit .ph {
+  margin-bottom: 14px;
+}
+
+.benefit p {
+  color: var(--muted);
+  margin: 0;
+}
+
+/* Vad ingår */
+.included {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.included .item {
+  text-align: center;
+}
+
+.included .item .ph {
+  margin-bottom: 8px;
+}
+
+.included .item h3 {
+  font-size: 1rem;
+  margin: 0;
+}
+
+.included .item p {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin: 0;
+}
+
+.included .item-main {
+  grid-column: 1 / -1;
+}
+
+/* Så funkar det */
+.steps {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 16px;
+  counter-reset: step;
+}
+
+.steps li {
+  counter-increment: step;
+  position: relative;
+  padding: 20px 20px 20px 72px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.steps li::before {
+  content: counter(step);
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 800;
+  display: grid;
+  place-items: center;
+}
+
+.steps h3 {
+  margin-bottom: 4px;
+}
+
+.steps p {
+  margin: 0;
+  color: var(--muted);
+}
+
+/* Från backen (kundbilder) */
+.ugc {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.ugc .ph {
+  font-size: 0.7rem;
+  padding: 6px;
+}
+
+.reviews {
+  display: grid;
+  gap: 12px;
+}
+
+.review {
+  margin: 0;
+}
+
+.review blockquote {
+  margin: 0 0 10px;
+  font-size: 1.05rem;
+}
+
+.review figcaption {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.review.placeholder {
+  border-style: dashed;
+  color: var(--muted);
+}
+
+/* Två kolumner: bild + text */
+.split {
+  display: grid;
+  gap: 24px;
+  align-items: center;
+}
+
+/* Vanliga frågor */
+.faq {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.faq details {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: 10px;
+}
+
+.faq summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 16px 48px 16px 18px;
+  font-weight: 700;
+  position: relative;
+}
+
+.faq summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq summary::after {
+  content: "+";
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: var(--accent);
+}
+
+.faq details[open] summary::after {
+  content: "–";
+}
+
+.faq details p {
+  padding: 0 18px 16px;
+  margin: 0;
+  color: var(--muted);
+}
+
+/* Avslutande köpuppmaning */
+.cta-band {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-2) 100%);
+  color: var(--on-dark);
+  text-align: center;
+  border-radius: 20px;
+  padding: 40px 20px;
+}
+
+.cta-band p {
+  opacity: 0.85;
+}
+
+.cta-band .btn {
+  margin-top: 8px;
+}
+
+/* ---------- Märkessidan ---------- */
+
+.page-head {
+  padding: 32px 0 8px;
+}
+
+.badge-row {
+  display: grid;
+  gap: 16px;
+  align-items: center;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.badge-row:last-child {
+  border-bottom: 0;
+}
+
+.badge-row p {
+  color: var(--muted);
+}
+
+.badge-buy {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.price {
+  font-weight: 800;
+  font-size: 1.2rem;
+}
+
+/* ---------- Innehållssidor ---------- */
+
+.prose {
+  max-width: 720px;
+}
+
+.prose p {
+  font-size: 1.05rem;
+  color: var(--muted);
+}
+
+.prose .ph {
   margin: 24px 0;
 }
 
-.feature-text h2 {
-  margin: 0 0 8px;
-}
-
-/* Kontakt */
 .contact {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 24px;
-  margin-top: 32px;
+  gap: 16px;
+  margin-top: 24px;
 }
 
-.contact-card {
-  padding: 24px;
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  background: var(--bg);
-}
-
-.contact-card h2 {
-  margin: 0 0 12px;
-  font-size: 1.15rem;
-}
-
-.contact-card address {
+.contact address {
   font-style: normal;
 }
 
@@ -181,45 +809,509 @@ body {
   color: var(--accent);
 }
 
-/* Surfplatta */
-@media (max-width: 900px) {
-  .content {
-    margin: 16px;
-    padding: 24px;
-  }
+/* ---------- Kassa ---------- */
+
+.checkout {
+  padding-top: 24px;
+  padding-bottom: 64px;
 }
 
-/* Mobil */
-@media (max-width: 640px) {
+.checkout-grid {
+  display: grid;
+  gap: 16px;
+  align-items: start;
+}
+
+.checkout h2 {
+  font-size: 1.2rem;
+}
+
+.cart-empty {
+  text-align: center;
+  padding: 24px 0 8px;
+}
+
+.line {
+  display: grid;
+  grid-template-columns: 64px 1fr auto;
+  gap: 12px;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.line .ph {
+  aspect-ratio: 1 / 1;
+  padding: 0;
+  border-width: 1px;
+  font-size: 0;
+}
+
+.line-name {
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.line-desc {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.line-price {
+  font-weight: 700;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.qty {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 6px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+}
+
+.qty button {
+  width: 34px;
+  height: 34px;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 1.1rem;
+  cursor: pointer;
+  color: var(--text);
+  border-radius: 50%;
+}
+
+.qty button:hover {
+  background: var(--surface-2);
+}
+
+.qty output {
+  min-width: 24px;
+  text-align: center;
+  font-weight: 700;
+}
+
+.link-btn {
+  background: none;
+  border: 0;
+  padding: 0;
+  margin-left: 10px;
+  font: inherit;
+  font-size: 0.85rem;
+  color: var(--muted);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.ship-progress {
+  margin: 16px 0 4px;
+  font-size: 0.9rem;
+}
+
+.ship-bar {
+  height: 8px;
+  margin-top: 6px;
+  border-radius: 4px;
+  background: var(--surface-2);
+  overflow: hidden;
+}
+
+.ship-bar span {
+  display: block;
+  height: 100%;
+  background: var(--good);
+  border-radius: 4px;
+  transition: width 0.3s;
+}
+
+.totals {
+  margin: 16px 0 0;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 4px 0;
+}
+
+.totals dt { color: var(--muted); }
+.totals dd { margin: 0; text-align: right; }
+
+.totals .grand {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--text);
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+  margin-top: 4px;
+}
+
+.upsell-list {
+  display: grid;
+  gap: 10px;
+}
+
+.upsell {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  align-items: center;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.upsell strong {
+  display: block;
+  line-height: 1.3;
+}
+
+.upsell span {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.upsell.highlight {
+  border: 2px solid var(--good);
+  background: var(--good-soft);
+}
+
+.form-step {
+  margin-top: 24px;
+}
+
+.form-step:first-child {
+  margin-top: 0;
+}
+
+.field {
+  display: grid;
+  gap: 4px;
+  margin-bottom: 12px;
+}
+
+.field label {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.field input {
+  width: 100%;
+  min-height: 50px;
+  padding: 10px 14px;
+  border: 1px solid #c3ccd6;
+  border-radius: 10px;
+  font: inherit;
+  font-size: 1rem;   /* 16px hindrar zoom i iPhone */
+  background: #fff;
+  color: #17212b;
+}
+
+.field input:focus {
+  outline: 2px solid #2b7cff;
+  border-color: #2b7cff;
+}
+
+.row-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 12px;
+}
+
+.row-zip {
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+  gap: 0 12px;
+}
+
+.pay-options {
+  display: grid;
+  gap: 10px;
+  border: 0;
+  padding: 0;
+  margin: 0 0 16px;
+}
+
+.pay-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  cursor: pointer;
+  background: var(--surface);
+}
+
+.pay-option:has(input:checked) {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.pay-option input {
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  accent-color: var(--accent);
+  flex: none;
+}
+
+.pay-option-body {
+  flex: 1;
+  display: grid;
+}
+
+.pay-option-body span {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.pay-option .pay-badges {
+  justify-content: flex-end;
+}
+
+.secure-note {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin: 10px 0 0;
+}
+
+.notice {
+  margin-top: 16px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: #fff6db;
+  border: 1px solid #f0d27a;
+  color: #5a4500;
+}
+
+.notice[hidden] {
+  display: none;
+}
+
+/* ---------- Fast köpfält i mobilen ---------- */
+
+.sticky-buy {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px calc(10px + env(safe-area-inset-bottom));
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  box-shadow: 0 -6px 20px rgba(18, 38, 58, 0.1);
+  transform: translateY(110%);
+  transition: transform 0.25s;
+}
+
+.sticky-buy.show {
+  transform: none;
+}
+
+.sticky-buy-info {
+  flex: 1;
+  display: grid;
+  line-height: 1.25;
+}
+
+.sticky-buy-info span {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.sticky-buy .btn {
+  min-height: 48px;
+  padding: 0 22px;
+}
+
+.has-sticky {
+  padding-bottom: 80px;
+}
+
+/* ---------- Toast ---------- */
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  z-index: 40;
+  transform: translate(-50%, 150%);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  max-width: calc(100% - 32px);
+  padding: 12px 18px;
+  border-radius: 999px;
+  background: var(--navy);
+  color: #fff;
+  box-shadow: var(--shadow);
+  transition: transform 0.25s;
+  white-space: nowrap;
+}
+
+.toast.show {
+  transform: translate(-50%, 0);
+}
+
+.toast a {
+  color: #ffd2c8;
+  font-weight: 700;
+}
+
+/* ---------- Sidfot ---------- */
+
+.footer {
+  margin-top: 48px;
+  background: var(--navy);
+  color: rgba(255, 255, 255, 0.85);
+  padding: 40px 0 24px;
+  font-size: 0.95rem;
+}
+
+.footer-grid {
+  display: grid;
+  gap: 24px;
+}
+
+.footer h3 {
+  color: #fff;
+  font-size: 1rem;
+}
+
+.footer ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 4px;
+}
+
+.footer a {
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+}
+
+.footer a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.footer-bottom {
+  margin-top: 32px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* ==========================================================
+   Större skärmar
+   ========================================================== */
+
+@media (min-width: 641px) {
   .topbar-inner {
-    height: auto;
-    flex-wrap: wrap;
-    padding: 10px 12px 8px;
-    row-gap: 4px;
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas: "logo nav cart";
+    column-gap: 16px;
+    min-height: 64px;
+    padding: 0 16px;
   }
 
   .menu {
-    width: 100%;
-    justify-content: space-between;
-    gap: 2px;
+    justify-content: flex-end;
+    gap: 4px;
   }
 
   .menu a {
-    padding: 6px 8px;
-    font-size: 0.95rem;
-    white-space: nowrap;
+    padding: 8px 14px;
+    font-size: 1rem;
   }
 
-  .content {
-    margin: 12px;
-    padding: 20px;
+  .ugc {
+    grid-template-columns: repeat(6, 1fr);
   }
 
-  .feature,
-  .feature.reverse {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 16px;
-    margin-top: 32px;
+  .included {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .reviews {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .contact {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 900px) {
+  .hero {
+    grid-template-columns: 1.1fr 1fr;
+    gap: 48px;
+    padding-top: 32px;
+    padding-bottom: 64px;
+    align-items: start;
+  }
+
+  .hero-media .ph {
+    aspect-ratio: 4 / 5;
+  }
+
+  .hero-buy {
+    position: sticky;
+    top: 96px;
+  }
+
+  .section {
+    padding: 72px 0;
+  }
+
+  .grid-3,
+  .steps {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .split {
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+  }
+
+  .badge-row {
+    grid-template-columns: 1fr 1.2fr;
+    gap: 40px;
+  }
+
+  .badge-row:nth-child(even) .ph {
+    order: 2;
+  }
+
+  .checkout-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .checkout-form {
+    position: sticky;
+    top: 96px;
+  }
+
+  .footer-grid {
+    grid-template-columns: 2fr 1fr 1fr;
+  }
+
+  .sticky-buy {
+    display: none;
+  }
+
+  .has-sticky {
+    padding-bottom: 0;
+  }
+
+  .cta-band {
+    padding: 56px 40px;
   }
 }
