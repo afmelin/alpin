@@ -1,0 +1,26 @@
+<div class="wrap">
+  <article class="prose page-head">
+    <h1>{{ page.title }}</h1>
+    {%- if section.settings.show_top_image -%}
+      {% render 'media', image: section.settings.top_image, label: section.settings.top_label, class: 'ph-wide', sizes: '(min-width: 760px) 720px, 100vw' %}
+    {%- endif -%}
+    <div class="rte">{{ page.content }}</div>
+    {%- if section.settings.show_bottom_image -%}
+      {% render 'media', image: section.settings.bottom_image, label: section.settings.bottom_label, class: 'ph-wide', sizes: '(min-width: 760px) 720px, 100vw' %}
+    {%- endif -%}
+  </article>
+</div>
+
+{% schema %}
+{
+  "name": "Sidinnehåll",
+  "settings": [
+    { "type": "checkbox", "id": "show_top_image", "label": "Visa bild under rubriken", "default": false },
+    { "type": "image_picker", "id": "top_image", "label": "Bild under rubriken" },
+    { "type": "text", "id": "top_label", "label": "Text i tom bildruta (överst)", "default": "Bild" },
+    { "type": "checkbox", "id": "show_bottom_image", "label": "Visa bild efter texten", "default": false },
+    { "type": "image_picker", "id": "bottom_image", "label": "Bild efter texten" },
+    { "type": "text", "id": "bottom_label", "label": "Text i tom bildruta (nederst)", "default": "Bild" }
+  ]
+}
+{% endschema %}

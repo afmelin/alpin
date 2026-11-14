@@ -1,0 +1,60 @@
+<header class="topbar">
+  <div class="topbar-inner">
+    <a href="{{ routes.root_url }}" class="logo">
+      {%- if section.settings.logo != blank -%}
+        {{ section.settings.logo | image_url: width: 300 | image_tag: alt: shop.name, height: section.settings.logo_height, class: 'logo-img' }}
+      {%- else -%}
+        {{ shop.name }}
+      {%- endif -%}
+    </a>
+
+    <nav class="menu" aria-label="Huvudmeny">
+      {%- assign menu = section.settings.menu -%}
+      {%- if menu.links.size > 0 -%}
+        {%- for link in menu.links -%}
+          <a href="{{ link.url }}"{% if link.current %} class="active" aria-current="page"{% endif %}>{{ link.title }}</a>
+        {%- endfor -%}
+      {%- else -%}
+        <a href="{{ routes.root_url }}"{% if request.page_type == 'index' %} class="active" aria-current="page"{% endif %}>Hem</a>
+        <a href="/pages/markena">Märkena</a>
+        <a href="/pages/var-mal">Vårt mål</a>
+        <a href="/pages/kontakt">Kontakt</a>
+      {%- endif -%}
+    </nav>
+
+    <a href="{{ routes.cart_url }}" class="cart-link" aria-label="Varukorg, {{ cart.item_count }} varor"{% if request.page_type == 'cart' %} aria-current="page"{% endif %}>
+      {% render 'cart-icon' %}
+      <span class="cart-count" data-cart-count{% if cart.item_count == 0 %} hidden{% endif %}>{{ cart.item_count }}</span>
+    </a>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Sidhuvud",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logotyp",
+      "info": "Lämna tom för att visa butikens namn som text."
+    },
+    {
+      "type": "range",
+      "id": "logo_height",
+      "label": "Logotypens höjd",
+      "min": 20,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Meny",
+      "default": "main-menu"
+    }
+  ]
+}
+{% endschema %}

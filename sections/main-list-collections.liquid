@@ -1,0 +1,27 @@
+<div class="wrap">
+  <header class="page-head">
+    <h1>Alla kollektioner</h1>
+  </header>
+  <div class="product-grid">
+    {%- for collection in collections -%}
+      <article class="product-card card">
+        <a href="{{ collection.url }}" class="product-card-link">
+          {%- if collection.featured_image -%}
+            <div class="media ph-square">
+              {{ collection.featured_image | image_url: width: 800 | image_tag: loading: 'lazy', widths: '300, 500, 800', sizes: '(min-width: 900px) 33vw, 50vw' }}
+            </div>
+          {%- else -%}
+            {% render 'placeholder', label: collection.title, class: 'ph-square' %}
+          {%- endif -%}
+          <h3>{{ collection.title }}</h3>
+        </a>
+      </article>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Kollektionslista"
+}
+{% endschema %}

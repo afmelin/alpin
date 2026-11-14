@@ -1,0 +1,28 @@
+{%- comment -%}
+  Produktkort för kollektioner och sökresultat.
+  Användning: {% render 'product-card', product: product %}
+{%- endcomment -%}
+<article class="product-card card">
+  <a href="{{ product.url }}" class="product-card-link">
+    {%- if product.featured_media -%}
+      <div class="media ph-square">
+        {{ product.featured_media | image_url: width: 800 | image_tag:
+          loading: 'lazy',
+          widths: '300, 500, 800',
+          sizes: '(min-width: 900px) 33vw, 50vw',
+          alt: product.featured_media.alt
+        }}
+      </div>
+    {%- else -%}
+      {% render 'placeholder', label: product.title, class: 'ph-square' %}
+    {%- endif -%}
+    <h3>{{ product.title }}</h3>
+  </a>
+  <p class="price">
+    {%- if product.price_varies -%}från {% endif -%}
+    {{ product.price | money }}
+    {%- if product.compare_at_price > product.price %}
+      <s class="muted">{{ product.compare_at_price | money }}</s>
+    {%- endif -%}
+  </p>
+</article>

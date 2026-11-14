@@ -1,0 +1,25 @@
+<div class="wrap">
+  <header class="page-head">
+    <h1>{{ collection.title }}</h1>
+    {%- if collection.description != blank -%}<div class="lead rte">{{ collection.description }}</div>{%- endif -%}
+  </header>
+
+  {%- paginate collection.products by 24 -%}
+    <div class="product-grid">
+      {%- for product in collection.products -%}
+        {% render 'product-card', product: product %}
+      {%- else -%}
+        <p class="muted">Inga produkter här än.</p>
+      {%- endfor -%}
+    </div>
+    {%- if paginate.pages > 1 -%}
+      <nav class="pagination" aria-label="Sidor">{{ paginate | default_pagination }}</nav>
+    {%- endif -%}
+  {%- endpaginate -%}
+</div>
+
+{% schema %}
+{
+  "name": "Kollektion"
+}
+{% endschema %}

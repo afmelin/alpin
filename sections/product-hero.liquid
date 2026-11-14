@@ -1,0 +1,232 @@
+{%- comment -%}
+  Köpdelen: bild, rubrik, nytta, paketval, pris och köpknapp.
+  På startsidan väljs produkten i temaredigeraren. På produktsidan används
+  automatiskt den produkt som visas.
+{%- endcomment -%}
+{%- liquid
+  assign p = section.settings.product
+  if p == blank and product != blank
+    assign p = product
+  endif
+  assign form_id = 'product-form-' | append: section.id
+  if p != blank
+    assign current = p.selected_or_first_available_variant
+  endif
+  assign desc_lines = section.settings.variant_descriptions | newline_to_br | split: '<br />'
+-%}
+
+<section class="wrap hero">
+  <div class="hero-media">
+    {%- if p != blank and p.media.size > 0 -%}
+      <div class="gallery">
+        {%- for media in p.media limit: 6 -%}
+          {%- if forloop.first -%}{%- assign loading = 'eager' -%}{%- else -%}{%- assign loading = 'lazy' -%}{%- endif -%}
+          <div class="media gallery-item{% if forloop.first %} gallery-main{% endif %}">
+            {{ media.preview_image | image_url: width: 1400 | image_tag:
+              loading: loading,
+              widths: '400, 700, 1000, 1400',
+              sizes: '(min-width: 900px) 55vw, 100vw',
+              alt: media.alt
+            }}
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- else -%}
+      {% render 'placeholder', label: 'Bild: barn i skidbacken som stolt visar upp sin märkessköld', class: 'hero-ph' %}
+      <div class="thumbs">
+        {% render 'placeholder', label: 'Skölden' %}
+        {% render 'placeholder', label: 'Märkena' %}
+        {% render 'placeholder', label: 'På jackan' %}
+        {% render 'placeholder', label: 'Storlek i handen' %}
+      </div>
+    {%- endif -%}
+  </div>
+
+  <div class="hero-buy">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="eyebrow">{{ section.settings.eyebrow }}</p>
+    {%- endif -%}
+
+    <h1>
+      {%- if section.settings.heading != blank -%}
+        {{ section.settings.heading }}
+      {%- elsif p != blank -%}
+        {{ p.title }}
+      {%- else -%}
+        Fira varje framsteg i skidbacken
+      {%- endif -%}
+    </h1>
+
+    {%- if section.settings.lead != blank -%}
+      <div class="lead">{{ section.settings.lead }}</div>
+    {%- elsif p != blank and p.description != blank -%}
+      <div class="lead rte">{{ p.description }}</div>
+    {%- endif -%}
+
+    {%- if section.settings.bullets != blank -%}
+      <ul class="checks">
+        {%- assign bullets = section.settings.bullets | newline_to_br | split: '<br />' -%}
+        {%- for b in bullets -%}
+          {%- assign b = b | strip -%}
+          {%- if b != blank -%}<li>{{ b }}</li>{%- endif -%}
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+
+    {%- if p != blank -%}
+      {%- form 'product', p, id: form_id, class: 'buy-form' -%}
+        {%- if p.has_only_default_variant -%}
+          <input type="hidden" name="id" value="{{ current.id }}">
+          <p class="price price-lg">
+            {{ current.price | money }}
+            {%- if current.compare_at_price > current.price %} <s class="muted">{{ current.compare_at_price | money }}</s>{% endif -%}
+          </p>
+        {%- else -%}
+          <fieldset class="packs">
+            <legend>{{ section.settings.picker_label }}</legend>
+            {%- for variant in p.variants -%}
+              {%- liquid
+                assign vdesc = ''
+                for line in desc_lines
+                  assign parts = line | split: ':'
+                  assign key = parts.first | strip
+                  if key == variant.title and parts.size > 1
+                    assign vdesc = line | remove_first: parts.first | remove_first: ':' | strip
+                  endif
+                endfor
+              -%}
+              <label class="pack{% unless variant.available %} pack-soldout{% endunless %}">
+                {%- if variant.compare_at_price > variant.price -%}
+                  <span class="pack-tag">Spara {{ variant.compare_at_price | minus: variant.price | money_without_trailing_zeros }}</span>
+                {%- endif -%}
+                <input type="radio" name="id" value="{{ variant.id }}"
+                  data-price="{{ variant.price | money | escape }}"
+                  data-name="{{ variant.title | escape }}"
+                  {% if variant.id == current.id %}checked{% endif %}
+                  {% unless variant.available %}disabled{% endunless %}>
+                <span class="pack-body">
+                  <span class="pack-name">{{ variant.title }}</span>
+                  {%- if vdesc != blank -%}<span class="pack-desc">{{ vdesc }}</span>{%- endif -%}
+                  {%- unless variant.available -%}<span class="pack-desc">Slutsåld</span>{%- endunless -%}
+                </span>
+                <span class="pack-price">
+                  {%- if variant.compare_at_price > variant.price -%}<s>{{ variant.compare_at_price | money }}</s>{%- endif -%}
+                  {{ variant.price | money }}
+                </span>
+              </label>
+            {%- endfor -%}
+          </fieldset>
+        {%- endif -%}
+
+        <button type="submit" name="add" class="btn btn-primary btn-block" data-sticky-anchor{% unless current.available %} disabled{% endunless %}>
+          {%- if current.available -%}
+            {{ section.settings.button_label }} – <span data-pack-price>{{ current.price | money }}</span>
+          {%- else -%}
+            Slutsåld
+          {%- endif -%}
+        </button>
+      {%- endform -%}
+    {%- else -%}
+      <p class="notice">Välj vilken produkt som ska säljas här under <strong>Anpassa</strong> i Shopify (inställningen "Produkt" i den här sektionen).</p>
+      <button type="button" class="btn btn-primary btn-block" disabled>{{ section.settings.button_label }}</button>
+    {%- endif -%}
+
+    {%- if section.settings.trust != blank -%}
+      <ul class="trust">
+        {%- assign trust = section.settings.trust | newline_to_br | split: '<br />' -%}
+        {%- for t in trust -%}
+          {%- assign t = t | strip -%}
+          {%- if t != blank -%}<li>{{ t }}</li>{%- endif -%}
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+
+    {% render 'payment-icons' %}
+  </div>
+</section>
+
+{%- if p != blank and current.available and section.settings.sticky -%}
+  <div class="sticky-buy">
+    <div class="sticky-buy-info">
+      <strong data-pack-name>{% if p.has_only_default_variant %}{{ p.title }}{% else %}{{ current.title }}{% endif %}</strong>
+      <span data-pack-price>{{ current.price | money }}</span>
+    </div>
+    <button type="submit" form="{{ form_id }}" name="add" class="btn btn-primary">{{ section.settings.button_label }}</button>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Produkt – köpdel",
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Produkt",
+      "info": "Används på startsidan. På produktsidor visas automatiskt den aktuella produkten."
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Liten rubrik ovanför",
+      "default": "Skidmärken för barn"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Rubrik",
+      "info": "Lämna tom för att visa produktens namn.",
+      "default": "Fira varje framsteg i skidbacken"
+    },
+    {
+      "type": "richtext",
+      "id": "lead",
+      "label": "Ingress",
+      "info": "Lämna tom för att visa produktens beskrivning.",
+      "default": "<p>Från första plogen till första knappliften. Barnet samlar märken på sin egen sköld och tar hem ett minne att vara stolt över.</p>"
+    },
+    {
+      "type": "textarea",
+      "id": "bullets",
+      "label": "Fördelar (en per rad)",
+      "default": "Gör de första skiddagarna roligare\nEtt minne från resan att visa upp\nVäcker längtan till nästa skidsemester"
+    },
+    {
+      "type": "text",
+      "id": "picker_label",
+      "label": "Rubrik för paketval",
+      "default": "Välj paket"
+    },
+    {
+      "type": "textarea",
+      "id": "variant_descriptions",
+      "label": "Beskrivning per paket",
+      "info": "En rad per variant: Variantnamn: beskrivning",
+      "default": "Startpaketet: 1 märkessköld + 4 skidmärken\nSyskonpaketet: 2 märkessköldar + 8 skidmärken"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Text på köpknappen",
+      "default": "Köp nu"
+    },
+    {
+      "type": "textarea",
+      "id": "trust",
+      "label": "Trygghetsrader under knappen (en per rad)",
+      "default": "Fri frakt över 499 kr\nSkickas inom 1–2 vardagar – hinner fram före resan\n14 dagars ångerrätt"
+    },
+    {
+      "type": "checkbox",
+      "id": "sticky",
+      "label": "Visa fast köpfält i mobilen",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Produkt – köpdel"
+    }
+  ]
+}
+{% endschema %}

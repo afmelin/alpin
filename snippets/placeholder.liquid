@@ -1,0 +1,5 @@
+{%- comment -%}
+  Tom bildruta som visas tills en riktig bild har valts.
+  Användning: {% render 'placeholder', label: 'Bild: ...', class: 'ph-wide' %}
+{%- endcomment -%}
+<div class="ph {{ class }}"><span>{{ label | default: 'Bild' }}</span></div>

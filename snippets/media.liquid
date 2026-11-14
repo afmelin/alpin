@@ -1,0 +1,17 @@
+{%- comment -%}
+  Visar en bild om den finns, annars en tom bildruta.
+  Användning: {% render 'media', image: block.settings.image, label: 'Bild: ...', class: 'ph-square', sizes: '(min-width: 900px) 33vw, 100vw' %}
+{%- endcomment -%}
+{%- assign img_sizes = sizes | default: '100vw' -%}
+{%- if image != blank -%}
+  <div class="media {{ class }}">
+    {{ image | image_url: width: 1600 | image_tag:
+      loading: 'lazy',
+      widths: '300, 500, 800, 1200, 1600',
+      sizes: img_sizes,
+      alt: image.alt
+    }}
+  </div>
+{%- else -%}
+  {% render 'placeholder', label: label, class: class %}
+{%- endif -%}

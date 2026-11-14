@@ -1,0 +1,64 @@
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h3>{{ shop.name }}</h3>
+        {%- if section.settings.text != blank -%}
+          <div class="footer-text">{{ section.settings.text }}</div>
+        {%- endif -%}
+        {% render 'payment-icons' %}
+      </div>
+
+      {%- for i in (1..2) -%}
+        {%- if i == 1 -%}
+          {%- assign menu = section.settings.menu_1 -%}
+        {%- else -%}
+          {%- assign menu = section.settings.menu_2 -%}
+        {%- endif -%}
+        {%- if menu.links.size > 0 -%}
+          <div>
+            <h3>{{ menu.title }}</h3>
+            <ul>
+              {%- for link in menu.links -%}
+                <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+
+    <p class="footer-bottom">© {{ 'now' | date: '%Y' }} {{ section.settings.company | default: shop.name }}</p>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Sidfot",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Skidmärken som firar barnens framsteg i backen.</p>"
+    },
+    {
+      "type": "link_list",
+      "id": "menu_1",
+      "label": "Meny 1",
+      "default": "footer"
+    },
+    {
+      "type": "link_list",
+      "id": "menu_2",
+      "label": "Meny 2"
+    },
+    {
+      "type": "text",
+      "id": "company",
+      "label": "Företagsnamn",
+      "default": "Aktiebolaget Alpinfrämjandet"
+    }
+  ]
+}
+{% endschema %}

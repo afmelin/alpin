@@ -1,0 +1,39 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Alpin",
+    "theme_version": "1.0.0",
+    "theme_author": "Alpin",
+    "theme_documentation_url": "https://help.shopify.com/manual/online-store/themes",
+    "theme_support_url": "https://help.shopify.com"
+  },
+  {
+    "name": "Färger",
+    "settings": [
+      {
+        "type": "color",
+        "id": "color_accent",
+        "label": "Köpknappar och accent",
+        "default": "#e2482f"
+      },
+      {
+        "type": "color",
+        "id": "color_navy",
+        "label": "Sidhuvud och sidfot",
+        "default": "#12263a"
+      }
+    ]
+  },
+  {
+    "name": "Frakt",
+    "settings": [
+      {
+        "type": "number",
+        "id": "free_shipping_threshold",
+        "label": "Fri frakt från (kr)",
+        "default": 499,
+        "info": "Används för mätaren i varukorgen. Själva fraktreglerna ställs in under Inställningar → Frakt och leverans i Shopify. Sätt 0 för att dölja mätaren."
+      }
+    ]
+  }
+]

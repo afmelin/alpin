@@ -1,0 +1,64 @@
+{%- comment -%}
+  Märkessidan: en rad per märke med bild, text och valfri köpknapp.
+{%- endcomment -%}
+<div class="wrap">
+  {%- for block in section.blocks -%}
+    {%- assign p = block.settings.product -%}
+    <section class="badge-row" {{ block.shopify_attributes }}>
+      {% render 'media', image: block.settings.image, label: block.settings.image_label, sizes: '(min-width: 900px) 45vw, 100vw' %}
+      <div>
+        {%- if block.settings.eyebrow != blank -%}<p class="eyebrow">{{ block.settings.eyebrow }}</p>{%- endif -%}
+        <h2>{{ block.settings.title }}</h2>
+        <div class="muted">{{ block.settings.text }}</div>
+
+        {%- if p != blank -%}
+          {%- assign v = p.selected_or_first_available_variant -%}
+          {%- form 'product', p, class: 'badge-buy js-ajax-add' -%}
+            <input type="hidden" name="id" value="{{ v.id }}">
+            <span class="price">{{ v.price | money }}</span>
+            {%- if p.available -%}
+              <button type="submit" name="add" class="btn {% if block.settings.primary %}btn-primary{% else %}btn-secondary btn-small{% endif %}">
+                {{ block.settings.button_label }}
+              </button>
+            {%- else -%}
+              <button type="button" class="btn btn-secondary btn-small" disabled>Slutsåld</button>
+            {%- endif -%}
+          {%- endform -%}
+        {%- elsif block.settings.note != blank -%}
+          <p><strong>{{ block.settings.note }}</strong></p>
+        {%- endif -%}
+      </div>
+    </section>
+  {%- endfor -%}
+</div>
+
+{% schema %}
+{
+  "name": "Märken",
+  "blocks": [
+    {
+      "type": "badge",
+      "name": "Märke",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Bild" },
+        { "type": "text", "id": "image_label", "label": "Text i tom bildruta", "default": "Bild" },
+        { "type": "text", "id": "eyebrow", "label": "Liten rubrik" },
+        { "type": "text", "id": "title", "label": "Namn", "default": "Märke" },
+        { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Beskriv märket.</p>" },
+        { "type": "product", "id": "product", "label": "Produkt att sälja", "info": "Lämna tom om märket inte säljs separat." },
+        { "type": "text", "id": "button_label", "label": "Knapptext", "default": "Lägg i varukorgen" },
+        { "type": "checkbox", "id": "primary", "label": "Framhävd knapp", "default": false },
+        { "type": "text", "id": "note", "label": "Text om ingen produkt är vald", "default": "Ingår i Startpaketet." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Märken",
+      "blocks": [
+        { "type": "badge" }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,229 @@
+{
+  "sections": {
+    "hero": {
+      "type": "product-hero",
+      "settings": {
+        "product": "alpin-skidmarken"
+      }
+    },
+    "benefits": {
+      "type": "benefits",
+      "settings": {},
+      "blocks": {
+        "benefits-1": {
+          "type": "benefit",
+          "settings": {
+            "image_label": "Bild: barn som firar i backen",
+            "title": "Fira varje framsteg",
+            "text": "<p>Första svängen, första liftåket, första gröna backen. Varje steg blir synligt och värt att fira.</p>"
+          }
+        },
+        "benefits-2": {
+          "type": "benefit",
+          "settings": {
+            "image_label": "Bild: barn visar skölden för familjen",
+            "title": "Ett minne att vara stolt över",
+            "text": "<p>Märkena följer med hem som ett bevis på vad barnet klarat av, att visa upp för familj och kompisar.</p>"
+          }
+        },
+        "benefits-3": {
+          "type": "benefit",
+          "settings": {
+            "image_label": "Bild: skölden hemma på väggen",
+            "title": "Längtan till nästa resa",
+            "text": "<p>Varje gång barnet ser sina märken påminns de om dagarna i backen och börjar längta efter nästa skidsemester.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "benefits-1",
+        "benefits-2",
+        "benefits-3"
+      ]
+    },
+    "included": {
+      "type": "included",
+      "settings": {
+        "button_link": "/pages/markena"
+      },
+      "blocks": {
+        "included-1": {
+          "type": "item",
+          "settings": {
+            "title": "Märkessköld",
+            "text": "Här samlas alla märken",
+            "wide": true
+          }
+        },
+        "included-2": {
+          "type": "item",
+          "settings": {
+            "title": "Skidskolemärke",
+            "text": "Gått i skidskola"
+          }
+        },
+        "included-3": {
+          "type": "item",
+          "settings": {
+            "title": "Barnbacken",
+            "text": "Första åken på riktigt"
+          }
+        },
+        "included-4": {
+          "type": "item",
+          "settings": {
+            "title": "Gröna backen",
+            "text": "Första gröna backen"
+          }
+        },
+        "included-5": {
+          "type": "item",
+          "settings": {
+            "title": "Knapplift",
+            "text": "Åkt knapplift själv"
+          }
+        }
+      },
+      "block_order": [
+        "included-1",
+        "included-2",
+        "included-3",
+        "included-4",
+        "included-5"
+      ]
+    },
+    "video": {
+      "type": "image-text",
+      "settings": {
+        "image_label": "Video: märkena i backen (från Instagram/YouTube)",
+        "show_video_placeholder": true,
+        "heading": "Se märkena i verkligheten",
+        "text": "<p>Så här ser det ut när ett barn får sitt första märke efter dagen i barnbacken.</p>",
+        "product": "alpin-skidmarken",
+        "button_label": "Köp Startpaketet",
+        "alt_bg": true
+      }
+    },
+    "steps": {
+      "type": "steps",
+      "settings": {},
+      "blocks": {
+        "steps-1": {
+          "type": "step",
+          "settings": {
+            "title": "Beställ före resan",
+            "text": "Vi skickar inom 1–2 vardagar, så paketet hinner fram innan ni åker."
+          }
+        },
+        "steps-2": {
+          "type": "step",
+          "settings": {
+            "title": "Barnet klarar en utmaning",
+            "text": "Skidskolan, barnbacken, gröna backen eller knappliften. Varje framsteg ger ett märke."
+          }
+        },
+        "steps-3": {
+          "type": "step",
+          "settings": {
+            "title": "Märket sätts på skölden",
+            "text": "Skölden fylls på under resan och blir ett minne att ta med hem."
+          }
+        }
+      },
+      "block_order": [
+        "steps-1",
+        "steps-2",
+        "steps-3"
+      ]
+    },
+    "social": {
+      "type": "social-proof",
+      "settings": {}
+    },
+    "gift": {
+      "type": "image-text",
+      "settings": {
+        "image_label": "Bild: inslaget paket med märkessköld",
+        "eyebrow": "Present",
+        "heading": "Den perfekta presenten inför skidresan",
+        "text": "<p>Till barnbarnet, brorsbarnet eller gudbarnet som ska ut i backen för första gången. Välj presentinslagning i varukorgen så kommer paketet inslaget och klart att ge bort.</p>",
+        "product": "alpin-skidmarken",
+        "button_label": "Köp som present"
+      }
+    },
+    "faq": {
+      "type": "faq",
+      "settings": {},
+      "blocks": {
+        "faq-1": {
+          "type": "question",
+          "settings": {
+            "question": "Hinner paketet fram före skidresan?",
+            "answer": "<p>Vi skickar inom 1–2 vardagar. Beställ gärna en vecka innan ni åker så är ni säkra.</p>"
+          }
+        },
+        "faq-2": {
+          "type": "question",
+          "settings": {
+            "question": "Hur kan jag betala?",
+            "answer": "<p>Med kort (Visa och Mastercard), Swish eller Klarna. Du behöver inte skapa något konto.</p>"
+          }
+        },
+        "faq-3": {
+          "type": "question",
+          "settings": {
+            "question": "Vad kostar frakten?",
+            "answer": "<p>Handlar du för 499 kr eller mer är frakten gratis. Annars visas fraktkostnaden i kassan.</p>"
+          }
+        },
+        "faq-4": {
+          "type": "question",
+          "settings": {
+            "question": "Kan jag köpa fler märken?",
+            "answer": "<p>Ja, alla märken finns som lösmärken. Du hittar dem under <a href=\"/pages/markena\">Märkena</a> eller i varukorgen.</p>"
+          }
+        },
+        "faq-5": {
+          "type": "question",
+          "settings": {
+            "question": "Kan jag ångra mitt köp?",
+            "answer": "<p>Ja, du har 14 dagars ångerrätt från att du har tagit emot paketet.</p>"
+          }
+        },
+        "faq-6": {
+          "type": "question",
+          "settings": {
+            "question": "Har ni fler frågor?",
+            "answer": "<p>Hör av dig via <a href=\"/pages/kontakt\">kontaktsidan</a> så hjälper vi dig.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq-1",
+        "faq-2",
+        "faq-3",
+        "faq-4",
+        "faq-5",
+        "faq-6"
+      ]
+    },
+    "cta": {
+      "type": "cta-band",
+      "settings": {
+        "product": "alpin-skidmarken",
+        "button_label": "Köp Startpaketet"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "benefits",
+    "included",
+    "video",
+    "steps",
+    "social",
+    "gift",
+    "faq",
+    "cta"
+  ]
+}

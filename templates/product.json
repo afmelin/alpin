@@ -1,0 +1,40 @@
+{
+  "sections": {
+    "main": {
+      "type": "product-hero",
+      "settings": {
+        "heading": "",
+        "lead": "",
+        "eyebrow": ""
+      }
+    },
+    "faq": {
+      "type": "faq",
+      "settings": {},
+      "blocks": {
+        "faq-1": {
+          "type": "question",
+          "settings": {
+            "question": "Hinner paketet fram före skidresan?",
+            "answer": "<p>Vi skickar inom 1–2 vardagar. Beställ gärna en vecka innan ni åker så är ni säkra.</p>"
+          }
+        },
+        "faq-2": {
+          "type": "question",
+          "settings": {
+            "question": "Kan jag ångra mitt köp?",
+            "answer": "<p>Ja, du har 14 dagars ångerrätt från att du har tagit emot paketet.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq-1",
+        "faq-2"
+      ]
+    }
+  },
+  "order": [
+    "main",
+    "faq"
+  ]
+}

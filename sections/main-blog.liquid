@@ -1,0 +1,32 @@
+<div class="wrap">
+  <header class="page-head">
+    <h1>{{ blog.title }}</h1>
+  </header>
+  {%- paginate blog.articles by 12 -%}
+    <div class="product-grid">
+      {%- for article in blog.articles -%}
+        <article class="product-card card">
+          <a href="{{ article.url }}" class="product-card-link">
+            {%- if article.image -%}
+              <div class="media ph-wide">
+                {{ article.image | image_url: width: 800 | image_tag: loading: 'lazy', widths: '400, 800', sizes: '(min-width: 900px) 33vw, 100vw' }}
+              </div>
+            {%- endif -%}
+            <h3>{{ article.title }}</h3>
+          </a>
+          <p class="muted">{{ article.published_at | date: '%Y-%m-%d' }}</p>
+          <p>{{ article.excerpt_or_content | strip_html | truncatewords: 25 }}</p>
+        </article>
+      {%- endfor -%}
+    </div>
+    {%- if paginate.pages > 1 -%}
+      <nav class="pagination" aria-label="Sidor">{{ paginate | default_pagination }}</nav>
+    {%- endif -%}
+  {%- endpaginate -%}
+</div>
+
+{% schema %}
+{
+  "name": "Blogg"
+}
+{% endschema %}

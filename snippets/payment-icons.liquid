@@ -1,0 +1,11 @@
+{%- comment -%}
+  Visar butikens aktiva betalsätt (Visa, Mastercard, Klarna, Swish m.fl.)
+  automatiskt utifrån inställningarna i Shopify.
+{%- endcomment -%}
+{%- if shop.enabled_payment_types.size > 0 -%}
+  <ul class="pay-icons" aria-label="Betalsätt">
+    {%- for type in shop.enabled_payment_types -%}
+      <li>{{ type | payment_type_svg_tag: class: 'pay-icon' }}</li>
+    {%- endfor -%}
+  </ul>
+{%- endif -%}

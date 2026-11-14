@@ -1,0 +1,88 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {}
+    },
+    "badges": {
+      "type": "badge-rows",
+      "settings": {},
+      "blocks": {
+        "badge-rows-1": {
+          "type": "badge",
+          "settings": {
+            "image_label": "Bild: Startpaketet – skölden med alla fyra märken",
+            "eyebrow": "Mest populärt",
+            "title": "Startpaketet",
+            "text": "<p>En märkessköld och fyra skidmärken: Skidskolemärke, Barnbacken, Gröna backen och Knapplift. Barnet samlar märkena på skölden allt eftersom de klarar nya utmaningar.</p>",
+            "product": "alpin-skidmarken",
+            "button_label": "Köp nu",
+            "primary": true
+          }
+        },
+        "badge-rows-2": {
+          "type": "badge",
+          "settings": {
+            "image_label": "Bild: Märkessköld",
+            "title": "Märkessköld",
+            "text": "<p>Skölden är basen i samlingen. Här fäster barnet sina skidmärken, så att alla framsteg samlas på ett ställe och blir ett minne att spara och visa upp.</p>"
+          }
+        },
+        "badge-rows-3": {
+          "type": "badge",
+          "settings": {
+            "image_label": "Bild: Skidskolemärke",
+            "title": "Skidskolemärke",
+            "text": "<p>För barnet som har gått i skidskola. Ett bevis på modet att prova något nytt och på allt de har lärt sig tillsammans med skidläraren.</p>"
+          }
+        },
+        "badge-rows-4": {
+          "type": "badge",
+          "settings": {
+            "image_label": "Bild: Barnbacken",
+            "title": "Barnbacken",
+            "text": "<p>De första åken på riktigt! Märket för barnet som har tagit sig ner för barnbacken och fått känna på hur roligt det är att åka skidor.</p>"
+          }
+        },
+        "badge-rows-5": {
+          "type": "badge",
+          "settings": {
+            "image_label": "Bild: Gröna backen",
+            "title": "Gröna backen",
+            "text": "<p>Dags för nästa steg. Märket för barnet som har åkt sin första gröna backe, med svängar, fart och stolthet hela vägen ner.</p>"
+          }
+        },
+        "badge-rows-6": {
+          "type": "badge",
+          "settings": {
+            "image_label": "Bild: Knapplift",
+            "title": "Knapplift",
+            "text": "<p>Att åka knapplift själv är en stor milstolpe. Märket för barnet som har lärt sig ta sig upp för backen på egen hand.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "badge-rows-1",
+        "badge-rows-2",
+        "badge-rows-3",
+        "badge-rows-4",
+        "badge-rows-5",
+        "badge-rows-6"
+      ]
+    },
+    "cta": {
+      "type": "cta-band",
+      "settings": {
+        "heading": "Flera barn i familjen?",
+        "text": "<p>Syskonpaketet: 2 märkessköldar + 8 skidmärken. Välj det bland paketen på startsidan.</p>",
+        "button_label": "Se paketen",
+        "button_link": "/"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "badges",
+    "cta"
+  ]
+}

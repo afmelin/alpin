@@ -1,0 +1,37 @@
+<div class="wrap">
+  <header class="page-head">
+    <h1>Sök</h1>
+    <form action="{{ routes.search_url }}" method="get" role="search" class="search-form">
+      <div class="field">
+        <label for="search-q" class="visually-hidden">Sök</label>
+        <input id="search-q" type="search" name="q" value="{{ search.terms | escape }}" placeholder="Sök i butiken">
+      </div>
+      <input type="hidden" name="type" value="product">
+      <button type="submit" class="btn btn-primary btn-small">Sök</button>
+    </form>
+  </header>
+
+  {%- if search.performed -%}
+    {%- paginate search.results by 24 -%}
+      <p class="muted">{{ search.results_count }} träffar för "{{ search.terms }}"</p>
+      <div class="product-grid">
+        {%- for item in search.results -%}
+          {%- if item.object_type == 'product' -%}
+            {% render 'product-card', product: item %}
+          {%- else -%}
+            <article class="card"><h3><a href="{{ item.url }}">{{ item.title }}</a></h3></article>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+      {%- if paginate.pages > 1 -%}
+        <nav class="pagination" aria-label="Sidor">{{ paginate | default_pagination }}</nav>
+      {%- endif -%}
+    {%- endpaginate -%}
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Sökresultat"
+}
+{% endschema %}

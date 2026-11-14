@@ -1,0 +1,66 @@
+<section class="section{% if section.settings.alt_bg %} section-alt{% endif %}">
+  <div class="wrap">
+    <div class="section-head center">
+      {%- if section.settings.heading != blank -%}<h2>{{ section.settings.heading }}</h2>{%- endif -%}
+      {%- if section.settings.text != blank -%}<div class="muted">{{ section.settings.text }}</div>{%- endif -%}
+    </div>
+
+    <div class="included">
+      {%- for block in section.blocks -%}
+        {%- if block.settings.wide -%}
+          {%- assign cls = 'ph-wide' -%}
+        {%- else -%}
+          {%- assign cls = 'ph-square' -%}
+        {%- endif -%}
+        <div class="item{% if block.settings.wide %} item-main{% endif %}" {{ block.shopify_attributes }}>
+          {% render 'media', image: block.settings.image, label: block.settings.title, class: cls, sizes: '(min-width: 641px) 25vw, 50vw' %}
+          <h3>{{ block.settings.title }}</h3>
+          {%- if block.settings.text != blank -%}<p>{{ block.settings.text }}</p>{%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+
+    {%- if section.settings.button_label != blank and section.settings.button_link != blank -%}
+      <p class="center-text">
+        <a href="{{ section.settings.button_link }}" class="btn btn-secondary btn-small">{{ section.settings.button_label }}</a>
+      </p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Vad ingår",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Rubrik", "default": "Det här ingår i Startpaketet" },
+    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>En märkessköld och fyra märken, ett för varje milstolpe i backen.</p>" },
+    { "type": "text", "id": "button_label", "label": "Knapptext", "default": "Läs mer om märkena" },
+    { "type": "url", "id": "button_link", "label": "Knapplänk" },
+    { "type": "checkbox", "id": "alt_bg", "label": "Vit bakgrund", "default": false }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Del",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Bild" },
+        { "type": "text", "id": "title", "label": "Namn", "default": "Märke" },
+        { "type": "text", "id": "text", "label": "Kort text" },
+        { "type": "checkbox", "id": "wide", "label": "Visa stort (hela bredden)", "default": false }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Vad ingår",
+      "blocks": [
+        { "type": "item", "settings": { "title": "Märkessköld", "text": "Här samlas alla märken", "wide": true } },
+        { "type": "item", "settings": { "title": "Skidskolemärke", "text": "Gått i skidskola" } },
+        { "type": "item", "settings": { "title": "Barnbacken", "text": "Första åken på riktigt" } },
+        { "type": "item", "settings": { "title": "Gröna backen", "text": "Första gröna backen" } },
+        { "type": "item", "settings": { "title": "Knapplift", "text": "Åkt knapplift själv" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

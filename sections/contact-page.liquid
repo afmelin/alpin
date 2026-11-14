@@ -1,0 +1,75 @@
+<div class="wrap">
+  <header class="page-head prose">
+    <h1>{{ page.title }}</h1>
+    <div class="rte">{{ page.content }}</div>
+  </header>
+
+  <div class="contact">
+    <section class="card">
+      <h2>{{ section.settings.company }}</h2>
+      <address>{{ section.settings.address | newline_to_br }}</address>
+      {%- if section.settings.org_nr != blank -%}<p class="muted">Org.nr {{ section.settings.org_nr }}</p>{%- endif -%}
+    </section>
+
+    <section class="card">
+      <h2>Kundtjänst</h2>
+      <dl class="contact-list">
+        {%- if section.settings.phone != blank -%}
+          <dt>Telefon</dt>
+          <dd><a href="tel:{{ section.settings.phone | remove: ' ' | remove: '-' }}">{{ section.settings.phone }}</a></dd>
+        {%- endif -%}
+        {%- if section.settings.email != blank -%}
+          <dt>E-post</dt>
+          <dd><a href="mailto:{{ section.settings.email }}">{{ section.settings.email }}</a></dd>
+        {%- endif -%}
+        {%- if section.settings.hours != blank -%}
+          <dt>Öppettider</dt>
+          <dd>{{ section.settings.hours }}</dd>
+        {%- endif -%}
+      </dl>
+    </section>
+  </div>
+
+  {%- if section.settings.show_form -%}
+    <section class="card contact-form-card">
+      <h2>Skicka ett meddelande</h2>
+      {%- form 'contact', id: 'contact-form' -%}
+        {%- if form.posted_successfully? -%}
+          <p class="notice notice-good" role="status">Tack! Vi har tagit emot ditt meddelande och svarar så snart vi kan.</p>
+        {%- elsif form.errors -%}
+          <div class="notice" role="alert">{{ form.errors | default_errors }}</div>
+        {%- endif -%}
+        <div class="row-2">
+          <div class="field">
+            <label for="contact-name">Namn</label>
+            <input id="contact-name" name="contact[name]" autocomplete="name" value="{{ form.name }}">
+          </div>
+          <div class="field">
+            <label for="contact-email">E-post</label>
+            <input id="contact-email" name="contact[email]" type="email" autocomplete="email" required value="{{ form.email }}">
+          </div>
+        </div>
+        <div class="field">
+          <label for="contact-body">Meddelande</label>
+          <textarea id="contact-body" name="contact[body]" rows="5" required>{{ form.body }}</textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Skicka</button>
+      {%- endform -%}
+    </section>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Kontaktuppgifter",
+  "settings": [
+    { "type": "text", "id": "company", "label": "Företag", "default": "Aktiebolaget Alpinfrämjandet" },
+    { "type": "textarea", "id": "address", "label": "Adress", "default": "Fjällvägen 12\n837 52 Åre\nSverige" },
+    { "type": "text", "id": "org_nr", "label": "Organisationsnummer", "default": "559123-4567" },
+    { "type": "text", "id": "phone", "label": "Telefon", "default": "0647-123 45" },
+    { "type": "text", "id": "email", "label": "E-post", "default": "info@alpinframjandet.se" },
+    { "type": "text", "id": "hours", "label": "Öppettider", "default": "Vardagar 09–16" },
+    { "type": "checkbox", "id": "show_form", "label": "Visa kontaktformulär", "default": true }
+  ]
+}
+{% endschema %}

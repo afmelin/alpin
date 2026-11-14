@@ -1,0 +1,19 @@
+<div class="wrap">
+  <article class="prose page-head">
+    <p class="muted">{{ article.published_at | date: '%Y-%m-%d' }}</p>
+    <h1>{{ article.title }}</h1>
+    {%- if article.image -%}
+      <div class="media ph-wide">
+        {{ article.image | image_url: width: 1400 | image_tag: widths: '400, 800, 1400', sizes: '(min-width: 760px) 720px, 100vw' }}
+      </div>
+    {%- endif -%}
+    <div class="rte">{{ article.content }}</div>
+    <p><a href="{{ blog.url }}">← Tillbaka till {{ blog.title }}</a></p>
+  </article>
+</div>
+
+{% schema %}
+{
+  "name": "Blogginlägg"
+}
+{% endschema %}

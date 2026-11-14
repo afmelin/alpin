@@ -1,0 +1,146 @@
+{%- comment -%}
+  Varukorgen. Betalningen sköts av Shopifys kassa (Visa, Mastercard,
+  Klarna, Swish m.fl. beroende på vad som är aktiverat i butiken).
+{%- endcomment -%}
+{%- liquid
+  assign threshold = settings.free_shipping_threshold | times: 100
+  assign left = threshold | minus: cart.total_price
+  if threshold > 0
+    assign pct = cart.total_price | times: 100 | divided_by: threshold
+    if pct > 100
+      assign pct = 100
+    endif
+  endif
+-%}
+
+<div class="wrap checkout">
+  <h1>Varukorg</h1>
+
+  {%- if cart.item_count == 0 -%}
+    <section class="card cart-empty">
+      <p>Din varukorg är tom.</p>
+      <a href="{{ section.settings.empty_link | default: routes.root_url }}" class="btn btn-primary">{{ section.settings.empty_button }}</a>
+    </section>
+  {%- else -%}
+    <div class="checkout-grid">
+      <div>
+        <section class="card" aria-labelledby="cart-title">
+          <h2 id="cart-title" class="visually-hidden">Dina varor</h2>
+
+          {%- for item in cart.items -%}
+            <div class="line">
+              <a href="{{ item.url }}" class="line-img" tabindex="-1" aria-hidden="true">
+                {%- if item.image -%}
+                  {{ item.image | image_url: width: 160 | image_tag: loading: 'lazy', alt: '' }}
+                {%- else -%}
+                  <div class="ph"></div>
+                {%- endif -%}
+              </a>
+              <div>
+                <a href="{{ item.url }}" class="line-name">{{ item.product.title }}</a>
+                {%- unless item.product.has_only_default_variant -%}
+                  <div class="line-desc">{{ item.variant.title }}</div>
+                {%- endunless -%}
+                <div>
+                  <span class="qty">
+                    <a href="{{ routes.cart_change_url }}?line={{ forloop.index }}&amp;quantity={{ item.quantity | minus: 1 }}" aria-label="Minska antal {{ item.product.title | escape }}">−</a>
+                    <output>{{ item.quantity }}</output>
+                    <a href="{{ routes.cart_change_url }}?line={{ forloop.index }}&amp;quantity={{ item.quantity | plus: 1 }}" aria-label="Öka antal {{ item.product.title | escape }}">+</a>
+                  </span>
+                  <a href="{{ item.url_to_remove }}" class="link-btn">Ta bort</a>
+                </div>
+              </div>
+              <div class="line-price">
+                {%- if item.original_line_price > item.final_line_price -%}
+                  <s class="muted">{{ item.original_line_price | money }}</s><br>
+                {%- endif -%}
+                {{ item.final_line_price | money }}
+              </div>
+            </div>
+          {%- endfor -%}
+
+          {%- if threshold > 0 -%}
+            <div class="ship-progress">
+              {%- if left > 0 -%}
+                <div>Handla för {{ left | money }} till så får du fri frakt.</div>
+              {%- else -%}
+                <div>Du har fri frakt!</div>
+              {%- endif -%}
+              <div class="ship-bar"><span style="width: {{ pct }}%"></span></div>
+            </div>
+          {%- endif -%}
+        </section>
+
+        {%- assign upsells = section.settings.upsell_products -%}
+        {%- if upsells.size > 0 -%}
+          {%- capture upsell_rows -%}
+            {%- for p in upsells -%}
+              {%- assign in_cart = false -%}
+              {%- for item in cart.items -%}
+                {%- if item.product_id == p.id -%}{%- assign in_cart = true -%}{%- endif -%}
+              {%- endfor -%}
+              {%- if p.available and in_cart == false -%}
+                {%- assign v = p.selected_or_first_available_variant -%}
+                {%- form 'product', p, class: 'upsell' -%}
+                  <input type="hidden" name="id" value="{{ v.id }}">
+                  <input type="hidden" name="return_to" value="{{ routes.cart_url }}">
+                  <div>
+                    <strong>{{ p.title }}</strong>
+                    {%- if p.description != blank -%}<span>{{ p.description | strip_html | truncatewords: 10 }}</span>{%- endif -%}
+                  </div>
+                  <button type="submit" name="add" class="btn btn-secondary btn-small">+ {{ v.price | money }}</button>
+                {%- endform -%}
+              {%- endif -%}
+            {%- endfor -%}
+          {%- endcapture -%}
+          {%- if upsell_rows != blank -%}
+            <section class="card cart-upsells" aria-labelledby="upsell-title">
+              <h2 id="upsell-title">{{ section.settings.upsell_heading }}</h2>
+              <div class="upsell-list">{{ upsell_rows }}</div>
+            </section>
+          {%- endif -%}
+        {%- endif -%}
+      </div>
+
+      <form action="{{ routes.cart_url }}" method="post" class="card checkout-form">
+        <h2>Sammanställning</h2>
+        <dl class="totals">
+          <dt>Varor</dt>
+          <dd>{{ cart.items_subtotal_price | money }}</dd>
+          {%- for discount in cart.cart_level_discount_applications -%}
+            <dt>{{ discount.title }}</dt>
+            <dd>−{{ discount.total_allocated_amount | money }}</dd>
+          {%- endfor -%}
+          <dt>Frakt</dt>
+          <dd>{% if threshold > 0 and left <= 0 %}Gratis{% else %}Beräknas i kassan{% endif %}</dd>
+          <dt class="grand">Totalt</dt>
+          <dd class="grand">{{ cart.total_price | money_with_currency }}</dd>
+        </dl>
+
+        {%- if section.settings.show_note -%}
+          <div class="field cart-note">
+            <label for="cart-note">Hälsning eller önskemål (valfritt)</label>
+            <textarea id="cart-note" name="note" rows="2">{{ cart.note }}</textarea>
+          </div>
+        {%- endif -%}
+
+        <button type="submit" name="checkout" class="btn btn-primary btn-block">Till kassan</button>
+        <p class="secure-note">Säker betalning · Inget konto behövs · 14 dagars ångerrätt</p>
+        <div class="center-pay">{% render 'payment-icons' %}</div>
+      </form>
+    </div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Varukorg",
+  "settings": [
+    { "type": "text", "id": "upsell_heading", "label": "Rubrik för tillägg", "default": "Passar bra till" },
+    { "type": "product_list", "id": "upsell_products", "label": "Tillägg i varukorgen", "limit": 6, "info": "T.ex. Syskonpaketet, presentinslagning och extra märken. Produkter som redan ligger i varukorgen döljs." },
+    { "type": "checkbox", "id": "show_note", "label": "Visa fält för hälsning/önskemål", "default": true },
+    { "type": "text", "id": "empty_button", "label": "Knapptext när varukorgen är tom", "default": "Se Startpaketet" },
+    { "type": "url", "id": "empty_link", "label": "Knapplänk när varukorgen är tom" }
+  ]
+}
+{% endschema %}

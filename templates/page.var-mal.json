@@ -1,0 +1,26 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "show_top_image": true,
+        "top_label": "Bild: barn som skrattar i skidbacken",
+        "show_bottom_image": true,
+        "bottom_label": "Bild: märkessköld hemma efter resan"
+      }
+    },
+    "cta": {
+      "type": "cta-band",
+      "settings": {
+        "heading": "Ge ditt barn en start i backen att minnas",
+        "text": "<p>Märkessköld + 4 skidmärken.</p>",
+        "product": "alpin-skidmarken",
+        "button_label": "Köp Startpaketet"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "cta"
+  ]
+}
