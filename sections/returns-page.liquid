@@ -1,0 +1,126 @@
+{%- comment -%}
+  Retur och reklamation.
+  Returer: Shopifys självbetjänade returer – kunden loggar in under
+  "Mitt konto" (engångskod via e-post) och begär retur på sin order.
+  Reklamation: skickas via Shopifys kontaktformulär till butikens e-post.
+{%- endcomment -%}
+<div class="wrap">
+  <header class="page-head prose">
+    <h1>{{ page.title }}</h1>
+    {%- if page.content != blank -%}
+      <div class="rte lead">{{ page.content }}</div>
+    {%- endif -%}
+  </header>
+
+  <!-- Retur -->
+  <section class="card returns-card" id="retur" aria-labelledby="return-title">
+    <h2 id="return-title">{{ section.settings.return_heading }}</h2>
+    {%- if section.settings.return_text != blank -%}
+      <div class="muted">{{ section.settings.return_text }}</div>
+    {%- endif -%}
+
+    {%- assign steps = section.settings.return_steps | newline_to_br | split: '<br />' -%}
+    <ol class="steps steps-compact">
+      {%- for s in steps -%}
+        {%- assign s = s | strip -%}
+        {%- if s != blank -%}<li><p>{{ s }}</p></li>{%- endif -%}
+      {%- endfor -%}
+    </ol>
+
+    <a href="{{ routes.account_url }}" class="btn btn-primary">{{ section.settings.return_button }}</a>
+
+    {%- if section.settings.return_note != blank -%}
+      <div class="muted small-note">{{ section.settings.return_note }}</div>
+    {%- endif -%}
+  </section>
+
+  <!-- Reklamation -->
+  <section class="card returns-card" id="reklamation" aria-labelledby="claim-title">
+    <h2 id="claim-title">{{ section.settings.claim_heading }}</h2>
+    {%- if section.settings.claim_text != blank -%}
+      <div class="muted">{{ section.settings.claim_text }}</div>
+    {%- endif -%}
+
+    {%- form 'contact', id: 'claim-form' -%}
+      {%- if form.posted_successfully? -%}
+        <p class="notice notice-good" role="status">Tack! Vi har tagit emot din reklamation och återkommer så snart vi kan, oftast inom 1–2 vardagar.</p>
+      {%- elsif form.errors -%}
+        <div class="notice" role="alert">{{ form.errors | default_errors }}</div>
+      {%- endif -%}
+
+      <input type="hidden" name="contact[Ärende]" value="Reklamation">
+
+      <div class="row-2">
+        <div class="field">
+          <label for="claim-name">Namn</label>
+          <input id="claim-name" name="contact[name]" autocomplete="name" required>
+        </div>
+        <div class="field">
+          <label for="claim-email">E-post</label>
+          <input id="claim-email" name="contact[email]" type="email" autocomplete="email" required>
+        </div>
+      </div>
+      <div class="row-2">
+        <div class="field">
+          <label for="claim-order">Ordernummer</label>
+          <input id="claim-order" name="contact[Ordernummer]" placeholder="t.ex. #1001" required>
+        </div>
+        <div class="field">
+          <label for="claim-product">Vilken vara gäller det?</label>
+          <input id="claim-product" name="contact[Vara]">
+        </div>
+      </div>
+      <div class="field">
+        <label for="claim-body">Beskriv felet</label>
+        <textarea id="claim-body" name="contact[body]" rows="5" required></textarea>
+      </div>
+      {%- if section.settings.claim_photo_note != blank -%}
+        <p class="muted small-note">{{ section.settings.claim_photo_note }}</p>
+      {%- endif -%}
+      <button type="submit" class="btn btn-primary">Skicka reklamation</button>
+    {%- endform -%}
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Retur och reklamation",
+  "settings": [
+    { "type": "header", "content": "Retur" },
+    { "type": "text", "id": "return_heading", "label": "Rubrik", "default": "Anmäl en retur" },
+    {
+      "type": "richtext",
+      "id": "return_text",
+      "label": "Text",
+      "default": "<p>Du har 14 dagars ångerrätt från att du har tagit emot paketet. Varan ska vara oanvänd och i originalförpackningen.</p>"
+    },
+    {
+      "type": "textarea",
+      "id": "return_steps",
+      "label": "Steg (ett per rad)",
+      "default": "Klicka på knappen nedan och logga in med din e-postadress. Du får en engångskod, inget lösenord behövs.\nVälj ordern och klicka på \"Begär retur\".\nVi godkänner returen och mejlar instruktioner för hur du skickar tillbaka varan.\nPengarna betalas tillbaka till samma betalsätt när vi har tagit emot returen."
+    },
+    { "type": "text", "id": "return_button", "label": "Knapptext", "default": "Gå till mina beställningar" },
+    {
+      "type": "richtext",
+      "id": "return_note",
+      "label": "Liten text under knappen",
+      "default": "<p>Hittar du inte din order? Använd samma e-postadress som när du handlade, eller kontakta oss via formuläret nedan.</p>"
+    },
+    { "type": "header", "content": "Reklamation" },
+    { "type": "text", "id": "claim_heading", "label": "Rubrik", "default": "Reklamera en vara" },
+    {
+      "type": "richtext",
+      "id": "claim_text",
+      "label": "Text",
+      "default": "<p>Har en vara gått sönder eller var den felaktig när den kom? Fyll i formuläret så kontaktar kundtjänst dig. Du har rätt att reklamera fel som fanns när du fick varan i upp till tre år.</p>"
+    },
+    {
+      "type": "text",
+      "id": "claim_photo_note",
+      "label": "Tips under formuläret",
+      "default": "Har du en bild på felet? Svara med den på mejlet du får från oss."
+    }
+  ]
+}
+{% endschema %}

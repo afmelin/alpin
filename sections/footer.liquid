@@ -26,6 +26,15 @@
           </div>
         {%- endif -%}
       {%- endfor -%}
+
+      {%- if section.settings.returns_label != blank -%}
+        <div>
+          <h3>{{ section.settings.service_heading }}</h3>
+          <ul>
+            <li><a href="{{ section.settings.returns_page.url | default: '/pages/retur' }}">{{ section.settings.returns_label }}</a></li>
+          </ul>
+        </div>
+      {%- endif -%}
     </div>
 
     <p class="footer-bottom">© {{ 'now' | date: '%Y' }} {{ section.settings.company | default: shop.name }}</p>
@@ -52,6 +61,29 @@
       "type": "link_list",
       "id": "menu_2",
       "label": "Meny 2"
+    },
+    {
+      "type": "header",
+      "content": "Kundservice"
+    },
+    {
+      "type": "text",
+      "id": "service_heading",
+      "label": "Rubrik",
+      "default": "Kundservice"
+    },
+    {
+      "type": "text",
+      "id": "returns_label",
+      "label": "Länktext för retur",
+      "default": "Retur eller reklamation",
+      "info": "Lämna tom för att dölja länken."
+    },
+    {
+      "type": "page",
+      "id": "returns_page",
+      "label": "Sida för retur",
+      "info": "Lämna tom för att länka till /pages/retur."
     },
     {
       "type": "text",

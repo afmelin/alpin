@@ -1300,7 +1300,9 @@ p {
   }
 
   .footer-grid {
-    grid-template-columns: 2fr 1fr 1fr;
+    grid-template-columns: 2fr;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
   }
 
   .sticky-buy {
@@ -1638,4 +1640,42 @@ p {
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
   }
+}
+
+/* Retur och reklamation */
+.returns-card {
+  margin-bottom: 16px;
+  max-width: 760px;
+}
+
+.returns-card > .muted {
+  margin-bottom: 16px;
+}
+
+.steps-compact {
+  gap: 0;
+  margin: 8px 0 20px;
+}
+
+.steps-compact li {
+  padding: 10px 0 10px 48px;
+  border: 0;
+  background: none;
+}
+
+.steps-compact li::before {
+  left: 0;
+  top: 8px;
+  width: 30px;
+  height: 30px;
+  font-size: 0.9rem;
+}
+
+.small-note {
+  margin-top: 12px;
+  font-size: 0.9rem;
+}
+
+.returns-card form {
+  margin-top: 8px;
 }

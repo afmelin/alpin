@@ -29,6 +29,7 @@ Alla texter, bilder och produkter går att ändra under **Webbshop → Teman →
    | Märkena   | `markena`   | `page.markena` |
    | Vårt mål  | `var-mal`   | `page.var-mal` |
    | Kontakt   | `kontakt`   | `page.contact` |
+   | Retur eller reklamation | `retur` | `page.retur` |
 
    Texten för *Vårt mål* skrivs i sidans innehållsfält.
 
@@ -42,6 +43,11 @@ Alla texter, bilder och produkter går att ändra under **Webbshop → Teman →
 7. **Frakt** (*Inställningar → Frakt och leverans*)
    Lägg in fri frakt från 499 kr. Gränsen för mätaren i varukorgen ställs in under
    *Temainställningar → Frakt*.
+
+8. **Returer** (*Inställningar → Kundkonton* och *Inställningar → Policyer*)
+   Använd de nya kundkontona och slå på självbetjänade returer (return rules).
+   Kunden loggar då in med en engångskod och begär retur direkt på sin order.
+   Reklamationer kommer in via formuläret på returssidan till butikens e-post.
 
 ## Struktur
 
